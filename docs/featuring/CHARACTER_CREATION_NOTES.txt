@@ -1,0 +1,47 @@
+=== CHARACTER CREATION PAGE ===
+
+FILE: app/onboarding/character/page.tsx
+URL: /onboarding/character
+
+=== FUNGSI ===
+Input nama dan umur player sebelum membuat perusahaan
+
+=== STATE ===
+- name: string (input nama)
+- age: number (input umur, default 25)
+- errors: object (pesan error validasi)
+
+=== VALIDASI ===
+- Nama: minimal 2 karakter
+- Umur: 18-100 tahun
+
+=== FLOW ===
+1. User input nama & umur
+2. Klik submit
+3. Validasi input
+4. Simpan ke localStorage (key: temp_player)
+5. Redirect ke /onboarding/company
+
+=== TEMPORARY STORAGE ===
+Kenapa pakai localStorage bukan langsung gameStore?
+- Character creation baru step 1 dari 2
+- Data belum lengkap (belum ada company)
+- Setelah company creation selesai, baru panggil gameStore.initializeGame()
+
+=== ERROR HANDLING ===
+Error: "useRouter is not a function"
+  → Pastikan import dari 'next/navigation' bukan 'next/router'
+  → 'use client' harus ada di line pertama
+
+Error: "localStorage is not defined"
+  → localStorage hanya ada di browser (client-side)
+  → Pastikan ada 'use client' directive
+
+=== NEXT STEPS ===
+Buat company creation page yang:
+- Ambil data dari localStorage (temp_player)
+- Input company name
+- Pilih business type
+- Panggil gameStore.initializeGame()
+- Hapus temp_player dari localStorage
+- Redirect ke /game

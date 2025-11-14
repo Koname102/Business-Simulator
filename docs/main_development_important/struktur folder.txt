@@ -1,0 +1,83 @@
+struktur folder
+
+BUSINESS_SIMULATOR/
+├── app/
+│   ├── api/
+│   │   └── saves/
+│   │       ├── delete/route.ts
+│   │       ├── download/route.ts
+│   │       ├── list/route.ts
+│   │       ├── load/route.ts
+│   │       └── save/route.ts
+│   ├── game/
+│   │   ├── fintech/page.tsx
+│   │   ├── insurance/
+│   │   │   ├── health/page.tsx
+│   │   │   └── life/page.tsx
+│   │   ├── investment/page.tsx
+│   │   └── page.tsx
+│   ├── onboarding/
+│   │   ├── character/page.tsx
+│   │   └── company/page.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── game/
+│   │   ├── fintech/
+│   │   │   ├── lending/                    
+│   │   │   │   ├── LoanApplicationCard.tsx
+│   │   │   │   ├── ActiveLoanCard.tsx
+│   │   │   │   └── LoanStats.tsx
+│   │   │   ├── payment/                    
+│   │   │   │   └── (coming soon)
+│   │   │   └── FintechStats.tsx            
+│   │   │
+│   │   ├── insurance/
+│   │   │   ├── life/ 
+│   │   │   │   ├── ClaimHistoryPanel.tsx                      
+│   │   │   │   ├── LifePolicyCard.tsx
+│   │   │   │   └── LifeClaimCard.tsx
+│   │   │   ├── health/                     
+│   │   │   │   ├── HealthPolicyCard.tsx
+│   │   │   │   └── HealthClaimCard.tsx
+│   │   │   └── InsuranceStats.tsx          
+│   │   │
+│   │   ├── investment/
+│   │   │   ├── vc/                         
+│   │   │   │   ├── DealFlowCard.tsx
+│   │   │   │   ├── PortfolioCard.tsx
+│   │   │   │   └── VCStats.tsx
+│   │   │   ├── pe/                         
+│   │   │   │   └── (coming soon)
+│   │   │   └── InvestmentStats.tsx         
+│   │   │
+│   │   ├── shared/                         
+│   │   │   ├── Header.tsx
+│   │   │   ├── NotificationPanel.tsx
+│   │   │   ├── StatsCard.tsx
+│   │   │   └── TimeDisplay.tsx
+│   │   │
+│   │   └── saves/                          
+│   │       ├── SaveLoadMenu.tsx
+│   │       └── AutoSaveManager.tsx
+│   │
+│   └── TitleScreen.tsx                     
+├── lib/
+│   ├── game-logic/
+│   │   ├── fintech.ts
+│   │   ├── investment.ts
+│   │   └── life-insurance.ts
+│   ├── constants.ts
+│   ├── difficulty-config.ts
+│   ├── save-manager.ts
+│   ├── time-system.ts
+│   └── types.ts
+├── hooks/
+│   └── useKeyboardShortcuts.ts
+├── store/
+│   └── gameStore.ts
+├── saves/
+│   └── .gitkeep
+└── .eslintrc.json

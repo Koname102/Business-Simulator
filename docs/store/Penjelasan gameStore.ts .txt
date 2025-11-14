@@ -1,0 +1,165 @@
+/*
+=== ZUSTAND STORE EXPLAINED ===
+
+What is Zustand?
+  - State management library (simpler than Redux)
+  - Like React useState but global (accessible from any component)
+  - Automatically re-renders components when state changes
+
+Store Structure:
+  - State: Data (player, company, transactions, etc)
+  - Actions: Functions to modify state (initializeGame, updateBalance, etc)
+
+Persist Middleware:
+  - Automatically saves state to localStorage
+  - Loads state on page refresh
+  - Key: 'business-simulator-save'
+
+=== KEY FUNCTIONS ===
+
+initializeGame(playerName, playerAge, companyName, businessType)
+  - Called: After character & company creation
+  - Purpose: Create new game with player/company data
+  - Flow:
+    1. Generate UUIDs for player and company
+    2. Create Player object with input data
+    3. Create Company object with starting capital
+    4. Initialize business-specific state (fintech/insurance/investment)
+    5. Set all to store
+
+updateBalance(amount)
+  - Called: When money changes (income/expense)
+  - Purpose: Update company balance and track revenue/expense
+  - Flow:
+    1. Add amount to balance (positive = income, negative = expense)
+    2. Update totalRevenue if income
+    3. Update totalExpense if expense
+    4. Update monthlyProfit
+
+addTransaction(transaction)
+  - Called: When financial activity happens
+  - Purpose: Log transaction for history
+  - Flow:
+    1. Generate ID and timestamp
+    2. Add to transactions array (max 100)
+
+addNotification(notification)
+  - Called: When game event happens
+  - Purpose: Show alert to player
+  - Flow:
+    1. Generate ID and timestamp
+    2. Set read: false
+    3. Add to notifications array (max 50)
+
+markNotificationRead(notificationId)
+  - Called: When player clicks notification
+  - Purpose: Mark as read
+  
+updateGameTime(seconds)
+  - Called: Every game tick
+  - Purpose: Track in-game time progression
+
+pauseGame() / resumeGame()
+  - Called: When player pauses/resumes
+  - Purpose: Control game flow
+
+resetGame()
+  - Called: When player starts new game
+  - Purpose: Clear all data
+
+initializeBusinessState(type)
+  - Helper function
+  - Creates empty business state based on type
+  - Returns object with fintech OR insurance OR investment
+
+=== USAGE IN COMPONENTS ===
+
+// Import store
+import { useGameStore } from '@/store/gameStore';
+
+// In component
+function MyComponent() {
+  // Get state
+  const player = useGameStore((state) => state.player);
+  const balance = useGameStore((state) => state.company?.balance);
+  
+  // Get actions
+  const updateBalance = useGameStore((state) => state.updateBalance);
+  const addNotification = useGameStore((state) => state.addNotification);
+  
+  // Use action
+  const handleEarnMoney = () => {
+    updateBalance(1_000_000); // +1 juta
+    addNotification({
+      type: 'success',
+      title: 'Income',
+      message: 'Earned Rp 1.000.000',
+    });
+  };
+  
+  return <div>{player?.name} has Rp {balance?.toLocaleString()}</div>;
+}
+
+=== TYPESCRIPT LEARNING NOTES ===
+
+Type Definitions:
+  - interface GameStore extends GameState
+    → GameStore has all GameState properties PLUS action functions
+  
+  - Omit<Transaction, 'id' | 'timestamp'>
+    → Transaction without 'id' and 'timestamp' (will be auto-generated)
+
+Zustand Generic:
+  - create<GameStore>()
+    → Tell TypeScript what shape the store has
+  
+Middleware:
+  - persist(storeConfig, { name: 'key' })
+    → Wraps store with localStorage functionality
+
+Nullish Coalescing:
+  - state.company ? {...} : state.company
+    → If company exists, modify it, else return as-is
+
+Spread Operator:
+  - { ...state.company, balance: newBalance }
+    → Copy all company properties, but replace balance
+
+Array Methods:
+  - [newItem, ...array].slice(0, 100)
+    → Add newItem to front, keep only first 100 items
+
+=== RELATIONS ===
+Imports:
+  - zustand (npm package)
+  - @/lib/types (for type definitions)
+  - @/lib/constants (for config values)
+
+Used by:
+  - All game components
+  - Character creation page
+  - Company creation page
+  - Game dashboard
+
+=== NEXT.JS LEARNING NOTES ===
+
+Why Zustand instead of React Context?
+  - Simpler API
+  - Better performance (selective re-renders)
+  - Built-in persistence
+  - No provider wrapper needed
+
+File location:
+  - /store/gameStore.ts
+  - Import: '@/store/gameStore' (@ = root alias from tsconfig.json)
+
+When to use:
+  - Global state (player, company, etc)
+  - State shared between pages/components
+  - State that persists (localStorage)
+
+When NOT to use:
+  - Local component state (use useState)
+  - Form state (use React Hook Form)
+  - Temporary UI state (modals, dropdowns)
+*/

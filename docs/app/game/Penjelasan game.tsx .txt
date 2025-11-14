@@ -1,0 +1,150 @@
+/*
+=== MAIN GAME DASHBOARD ===
+
+State Management:
+  Global State (from gameStore):
+    - player: Player data
+    - company: Company data
+    - fintech: Fintech business data
+    - updateBalance: Function untuk update balance
+    - addTransaction: Function untuk log transaction
+    - addNotification: Function untuk add notification
+  
+  Local State (useState):
+    - pendingLoans: Array loan yang pending (waiting approval)
+    - activeLoans: Array loan yang active (sudah di-approve)
+
+Kenapa pakai local state?
+  - Pending & active loans adalah UI state (tidak perlu persist)
+  - Lebih simple untuk demo/MVP
+  - Nanti bisa migrate ke gameStore jika perlu
+
+useEffect #1: Initial Load
+  - Jalan sekali saat component mount
+  - Check apakah player/company/fintech ada
+  - Jika tidak ada → redirect ke onboarding (belum setup game)
+  - Generate 3 loan applications awal
+  - Dependency: [player, company, fintech, router]
+
+useEffect #2: Loan Generator (Simulation)
+  - Jalan continuous dengan setInterval
+  - Every 15 seconds (15000ms), generate loan baru
+  - Add ke pendingLoans array
+  - Add notification
+  - Check isPaused: jika game pause, tidak generate
+  - Cleanup: clearInterval saat component unmount
+
+useEffect #3: Repayment Simulator (Simulation)
+  - Jalan continuous dengan setInterval
+  - Every 10 seconds (10000ms), process repayment
+  - Loop through activeLoans
+  - Untuk setiap loan:
+    * Check apakah akan default (shouldLoanDefault)
+    * Jika default: update status, deduct balance (loss)
+    * Jika tidak default: add monthly payment, update paidAmount
+    * Jika paidAmount >= total: mark as paid
+  - Update balance & transactions
+  - Add notifications untuk setiap event
+  - Cleanup: clearInterval saat component unmount
+
+handleApproveLoan(loanId)
+  - Find loan dari pendingLoans
+  - Check balance cukup atau tidak
+  - Jika tidak cukup: show error notification, return
+  - Jika cukup:
+    * Deduct balance (loan.amount keluar)
+    * Add transaction (expense)
+    * Add notification
+    * Update loan status jadi 'active'
+    * Add disbursedAt & dueDate
+    * Move loan dari pendingLoans ke activeLoans
+    * Remove dari pendingLoans
+
+handleRejectLoan(loanId)
+  - Remove loan dari pendingLoans
+  - Add notification (info)
+  - Tidak ada perubahan balance
+
+JSX Structure:
+  <div> (Full screen container)
+    <Header /> (Company name, balance, reputation)
+    
+    <div> (Main content)
+      <StatsCards /> (Metrics)
+      
+      <section> (Loan Applications)
+        <h2> Title + count
+        {pendingLoans.length === 0 
+          ? Empty state
+          : Grid of LoanApplicationCards
+        }
+      </section>
+      
+      <section> (Active Loans)
+        <h2> Title + count
+        {activeLoans.length === 0 
+          ? Empty state
+          : Grid of ActiveLoanCards
+        }
+      </section>
+    </div>
+  </div>
+
+Empty States:
+  - Jika tidak ada pending loans: show message "No pending applications"
+  - Jika tidak ada active loans: show message "No active loans yet"
+  - Better UX: user tahu kenapa kosong, bukan lihat blank screen
+
+Conditional Rendering:
+  {pendingLoans.length === 0 ? <EmptyState> : <Grid>}
+    - Ternary operator untuk conditional
+    - Alternative: && operator untuk single condition
+
+Array Mapping:
+  {pendingLoans.map((loan) => <LoanApplicationCard ... />)}
+    - Loop array dan render component untuk setiap item
+    - key prop: React butuh unique key untuk list items
+    - key={loan.id}: use loan ID as unique identifier
+
+Game Loop Timing:
+  - Loan generator: 15 seconds (adjust untuk testing)
+  - Repayment: 10 seconds (simulate monthly payment)
+  - Real game: bisa 1 minute = 1 day, jadi 30 days = 30 minutes
+
+Cleanup Functions:
+  return () => clearInterval(interval);
+    - Setiap useEffect dengan setInterval HARUS ada cleanup
+    - Prevent memory leaks
+    - Clear interval saat component unmount atau dependency berubah
+
+Relasi:
+  Import semua components:
+    - Header (display top bar)
+    - StatsCards (display metrics)
+    - LoanApplicationCard (display pending loans)
+    - ActiveLoanCard (display active loans)
+  
+  Import dari gameStore:
+    - State: player, company, fintech
+    - Actions: updateBalance, addTransaction, addNotification
+  
+  Import dari fintech.ts:
+    - generateLoanApplication (untuk generate loan baru)
+    - shouldLoanDefault (untuk simulate default)
+
+Testing:
+  1. Buka /game
+  2. Harus ada 3 loan applications awal
+  3. Wait 15 seconds → Loan baru muncul
+  4. Approve 1 loan → Balance berkurang, loan masuk active loans
+  5. Wait 10 seconds → Repayment process (balance bertambah)
+  6. Check notifications → Harus ada log events
+  7. Approve loan dengan balance tidak cukup → Error notification
+  8. Reject loan → Loan hilang dari pending
+
+Performance Notes:
+  - setInterval bisa memory leak jika tidak di-cleanup
+  - Array operations (.map, .filter) re-create array (immutable)
+  - Component re-render setiap state berubah (pendingLoans, activeLoans)
+  - Optimization nanti: useMemo, useCallback jika perlu
+*/

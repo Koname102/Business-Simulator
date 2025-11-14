@@ -1,0 +1,222 @@
+=== INSURANCE GAME MECHANICS ===
+
+FILES:
+- lib/game-logic/insurance.ts
+- components/game/insurance/ActivePolicyCard.tsx
+- components/game/insurance/ClaimApplicationCard.tsx
+- components/game/insurance/InsuranceStats.tsx
+- app/game/insurance/page.tsx
+
+=== GAME LOOPS ===
+
+Policy Sales (Every 20 seconds):
+  - Auto-generate new policy
+  - Random type: life/health/vehicle/property
+  - Add to activePolicies
+  - Show notification
+
+Premium Collection (Every 15 seconds):
+  - Loop through active policies
+  - Collect monthly premium
+  - Update balance (+income)
+  - Update totalPremiumCollected
+  - Check expiration (12 months)
+
+Claim Generation (Every 25 seconds):
+  - Random: Check each active policy
+  - Probability:
+    * Life: 1% (rare)
+    * Health: 15% (frequent)
+    * Vehicle: 10% (medium)
+    * Property: 5% (rare but high amount)
+  - Generate claim amount (% of coverage)
+  - Add to pendingClaims
+
+=== PLAYER DECISIONS ===
+
+Approve Claim:
+  - Balance decrease (expense)
+  - Policy marked as 'claimed'
+  - Customer happy
+  - totalClaimsPaid increases
+
+Reject Claim:
+  - Balance unchanged
+  - Reputation -5
+  - Customer unhappy
+  - Policy remains active
+
+Strategy:
+  - Approve valid claims: Customer satisfaction
+  - Reject suspicious claims: Save money
+  - Balance claim ratio <70%
+
+=== KEY METRICS ===
+
+Claim Ratio:
+  - Formula: (totalClaims / totalPremium) × 100%
+  - Target: <70%
+  - 70-80%: Danger zone
+  - >80%: Losing money
+
+Active Policies:
+  - Income source (monthly premium)
+  - More policies = more premium
+  - But also more claim risk
+
+Premium vs Claims:
+  - Premium: Recurring income (stable)
+  - Claims: Random expense (volatile)
+  - Profit = Premium - Claims - Operational
+
+=== POLICY TYPES ===
+
+Life Insurance:
+  - Coverage: 50-500 million
+  - Premium: 1.5% per year
+  - Claim frequency: 1% (rare)
+  - Claim amount: 80-100% (usually full)
+
+Health Insurance:
+  - Coverage: 10-100 million
+  - Premium: 3% per year (highest)
+  - Claim frequency: 15% (frequent)
+  - Claim amount: 10-50% (medical bills)
+
+Vehicle Insurance:
+  - Coverage: 20-200 million
+  - Premium: 2.5% per year
+  - Claim frequency: 10% (medium)
+  - Claim amount: 20-80% (repair costs)
+
+Property Insurance:
+  - Coverage: 100-1000 million (highest)
+  - Premium: 2% per year
+  - Claim frequency: 5% (rare)
+  - Claim amount: 30-100% (disaster damage)
+
+=== TIMINGS (Development) ===
+
+Policy Sales: 20 seconds
+Premium Collection: 15 seconds
+Claim Generation: 25 seconds
+
+Production (Recommended):
+Policy Sales: 2 minutes
+Premium Collection: 1 minute (= 1 month in-game)
+Claim Generation: 3 minutes
+
+=== BALANCE FLOW ===
+
+Initial: Rp 500,000,000
+
+Policy Sold (Premium 500k/month):
+  Wait 15s → +500k (premium collected)
+  
+Claim Submitted (50 million):
+  Approve → -50,000,000 (expense)
+  Reject → Reputation -5
+
+Example Flow (1 policy):
+  Month 1: +500k premium
+  Month 2: +500k premium
+  Month 3: +500k premium, Claim 20M submitted
+    → Approve: Balance = 500M + 1.5M - 20M = 481.5M
+    → Profit = 1.5M - 20M = -18.5M (loss on this policy)
+
+Example Flow (100 policies, avg 500k premium):
+  Per month: +50M premium
+  Claims (assume 10% claim, avg 10M each): -10M
+  Net profit: +40M per month (healthy!)
+
+=== WIN CONDITION ===
+
+- Keep claim ratio <70%
+- Maintain reputation >70
+- Grow active policies to 1000+
+- Reach balance 10x initial (5 billion)
+
+=== ERROR HANDLING ===
+
+Error: "Insufficient balance to pay claim"
+  → Solution: Reject some claims or wait for premium
+
+Error: "Reputation too low"
+  → Solution: Approve more claims (customer satisfaction)
+
+Error: "Claim ratio too high"
+  → Solution: Reject more claims or increase premium (not implemented yet)
+
+=== TESTING CHECKLIST ===
+
+[ ] Start game → 3 initial policies
+[ ] Wait 15s → Premium collected
+[ ] Wait 20s → New policy sold
+[ ] Wait 25s → Claim generated (maybe)
+[ ] Approve claim → Balance decreases
+[ ] Reject claim → Reputation -5
+[ ] Check stats: Claim ratio updates
+[ ] Check health score: Changes based on metrics
+[ ] Let policies expire → Status changes to 'expired'
+```
+
+---
+
+## **🧪 Complete Testing Flow**
+
+### **Test Insurance Game:**
+```
+1. Create new game, select Insurance
+   Expected: Redirect to /game/insurance
+
+2. Initial state:
+   - Balance: Rp 500,000,000
+   - Active policies: 3
+   - Pending claims: 0
+   - Stats all 0
+
+3. Wait 15 seconds (Premium collection):
+   Expected:
+   - Balance increases (~1-2 juta)
+   - Premium collected stat updates
+   - Notifications appear
+
+4. Wait 20 seconds (Policy sales):
+   Expected:
+   - New policy appears in list
+   - Active policies count +1
+   - Notification "New Policy Sold"
+
+5. Wait 25 seconds (Claim generation):
+   Expected:
+   - Maybe claim appears (random)
+   - If appears: Pending claims +1
+   - Notification "New Claim Submitted"
+
+6. Approve claim (if generated):
+   Expected:
+   - Balance decreases by claim amount
+   - Claims paid stat updates
+   - Claim removed from pending
+   - Policy marked as 'claimed'
+   - Notification "Claim Approved"
+
+7. Reject claim (if multiple generated):
+   Expected:
+   - Balance unchanged
+   - Reputation -5
+   - Claim removed from pending
+   - Notification "Claim Rejected"
+
+8. Check claim ratio:
+   Expected:
+   - If <70%: Green indicator
+   - If >70%: Red indicator
+
+9. Let game run 2-3 minutes:
+   Expected:
+   - Multiple policies sold
+   - Premium collected regularly
+   - Some claims generated
+   - Balance grows (if manage well)
+```

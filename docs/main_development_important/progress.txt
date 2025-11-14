@@ -1,0 +1,32 @@
+Tanggal 07-11-2025
+- buat next.js
+- pembuatan rencana, rancangan dan juga tahapan
+- pembuatan sistem Character and Company Creation
+- pembuatan mekanik game (fintech)
+
+Tanggal 08-11-2025
+- pembuatan mekanik game (insurance dan investment)
+
+Tanggal 09-11-2025
+- beberapa perbaikan pada sistem notifikasi
+- pembuatan Time/Progression System
+- perbaikan kecil di fintech
+
+Tanggal 10-11-2025
+- penyesuaian Basic Economy & Balance (fintech)
+- perbaikan game speed
+- perbaikan kecil di fintech
+
+Tanggal 11-11-2025
+- penyesuaian Basic Economy & Balance (insurance dan investment)
+- pembuatan load and save game
+
+Tanggal 12-11-2025
+- masih dalam pembuatan load and save game
+
+Tanggal 13-11-2025
+- sedikit perombakan struktur folder
+- perubahan mekanik game insurance dari generic ke life
+
+Tanggal 14-11-2025
+- perbaikan minor detail mekanik life insurance

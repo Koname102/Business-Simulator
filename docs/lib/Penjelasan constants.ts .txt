@@ -1,0 +1,64 @@
+/*
+=== CONSTANT EXPLANATIONS ===
+
+GAME_CONFIG
+  - TICK_INTERVAL: 1000ms = game updates every 1 second
+  - GAME_SPEED: 1x = normal speed (can be 2x, 3x later)
+  - AUTO_SAVE_INTERVAL: Save every 30 seconds
+  - STORAGE_KEY: localStorage key name
+  - STARTING_CAPITAL: Initial balance by business type
+  - XP_PER_LEVEL: 1000 XP needed per level
+  - MAX_LEVEL: Level cap at 100
+
+BUSINESS_CONFIG
+  fintech:
+    - MIN/MAX_LOAN: Loan amount range in Rupiah
+    - INTEREST_RATE: Annual rate in percent
+    - DEFAULT_RATE_TARGET: Target NPL < 5%
+  
+  insurance:
+    - MIN/MAX_PREMIUM: Monthly premium range
+    - CLAIM_RATIO_TARGET: Target < 70%
+    - POLICY_DURATION: 12 months standard
+  
+  investment:
+    - MIN/MAX_INVESTMENT: Investment size range
+    - MANAGEMENT_FEE: 2% of AUM per year
+    - PERFORMANCE_FEE: 20% of profits
+
+COLORS
+  - For UI consistency
+  - Use these hex values in Tailwind
+
+FORMULAS
+  calculateLoanRepayment(principal, rate, duration)
+    - Input: principal (Rp), rate (%), duration (months)
+    - Output: Total repayment amount
+    - Formula: principal * (1 + rate)^years
+    
+  calculateLevel(xp)
+    - Input: XP points
+    - Output: Player level
+    - Formula: floor(xp / 1000) + 1
+    
+  generateRandomName()
+    - Output: Random Indonesian name
+    - Used for NPCs (borrowers, policyholders, etc)
+
+=== USAGE EXAMPLES ===
+import { GAME_CONFIG, FORMULAS } from '@/lib/constants';
+
+// Get starting capital
+const capital = GAME_CONFIG.STARTING_CAPITAL['fintech']; // 100_000_000
+
+// Calculate loan repayment
+const total = FORMULAS.calculateLoanRepayment(10_000_000, 18, 12);
+// Result: 11_800_000
+
+// Calculate level from XP
+const level = FORMULAS.calculateLevel(2500); // Level 3
+
+=== RELATIONS ===
+- Used by: gameStore.ts, game-logic files, components
+- When to edit: For game balancing
+*/

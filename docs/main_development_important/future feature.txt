@@ -1,0 +1,2029 @@
+🎮 UNIVERSAL GAME SYSTEMS (All Business Types)
+Priority 1: Core Meta-Progression ⭐⭐⭐
+typescript✅ Level System (Company/Player)
+├─ XP from successful transactions
+├─ Level unlocks (new features, higher limits)
+├─ Skill tree (choose specializations)
+└─ Prestige/Reset system (start over with bonuses)
+
+✅ Employee System
+├─ Hire employees (CFO, Risk Manager, Analyst)
+├─ Each employee gives passive bonuses
+├─ Salary costs (recurring expense)
+├─ Training/upgrade employees
+└─ Fire/retire employees
+
+✅ Reputation System (Extended)
+├─ Current: Simple 0-100 number
+├─ Future: Multi-dimensional (Customer, Industry, Regulator)
+├─ Reputation affects: loan interest, policy price, deal quality
+└─ Random events based on reputation
+
+✅ Location/Market System
+├─ Multiple cities (Jakarta, Surabaya, Bandung)
+├─ Each market has different:
+│  ├─ Customer profiles
+│  ├─ Competition level
+│  ├─ Regulatory environment
+│  └─ Growth potential
+├─ Expand to new markets (unlock cost)
+└─ Manage multiple locations simultaneously
+
+✅ Rival Companies
+├─ 3-5 AI competitors
+├─ They compete for same customers/deals
+├─ Watch their market share
+├─ Random events (rival goes bankrupt, merges)
+└─ Competitive advantages/disadvantages
+
+✅ Events System
+├─ Random market events (boom, recession)
+├─ Regulatory changes (new laws affect business)
+├─ Black swan events (pandemic, crisis)
+├─ Opportunities (government stimulus)
+└─ Personal events (founder gets award, scandal)
+
+✅ Save/Load System
+├─ Auto-save every 30 seconds
+├─ Manual save slots (3-5 slots)
+├─ Cloud sync (optional)
+├─ Import/Export save file
+└─ Save game statistics
+Priority 2: Polish & UX ⭐⭐
+typescript✅ Advanced Stats Dashboard
+├─ Historical charts (balance over time)
+├─ Performance metrics (month-over-month growth)
+├─ Comparison to industry benchmarks
+└─ Export reports (PDF/CSV)
+
+✅ Tutorial System
+├─ Interactive guided tour (first-time users)
+├─ Tooltips on hover (explain mechanics)
+├─ Help center (documentation)
+└─ Video guides (optional)
+
+✅ Achievements System
+├─ 50+ achievements (milestones)
+├─ Badges (display on profile)
+├─ Secret achievements (easter eggs)
+└─ Achievement rewards (XP, bonuses)
+
+✅ Sound & Visual Effects
+├─ Background music (per business type)
+├─ Sound effects (money sounds, notifications)
+├─ Particle effects (celebrations on big wins)
+├─ Animated transitions
+└─ Dark mode
+
+✅ Leaderboards
+├─ Global rankings (by business type)
+├─ Friends leaderboards
+├─ Weekly/Monthly challenges
+└─ Seasonal competitions
+
+✅ Settings & Customization
+├─ Game speed presets (slow/normal/fast)
+├─ Notification preferences
+├─ Theme customization
+├─ Language selection
+└─ Accessibility options
+Priority 3: Social & Multiplayer ⭐
+typescript✅ Multiplayer Co-op (Future)
+├─ Partner with friend (shared company)
+├─ Compete against friends
+├─ Trade assets/resources
+└─ Chat/messaging
+
+✅ Community Features
+├─ Share save files (challenge mode)
+├─ Strategy guides (community wiki)
+├─ Forums/Discord integration
+└─ User-generated content (scenarios)
+
+🏦 TIPE B: NON-BANK FINANCIAL SERVICES
+
+1. Fintech Lending (P2P Lending) 
+CURRENT ✅Current State:
+✅ Basic loan application system
+✅ Approve/reject mechanics
+✅ Default risk system
+✅ Repayment tracking
+Future Features:
+Phase 1: Core Enhancements (No architecture changes)
+typescript✅ Multiple Loan Products
+├─ Personal Loans (current)
+├─ Business Loans (higher amounts)
+├─ Payday Loans (high risk/rate)
+└─ Mortgages (secured, long-term)
+
+✅ Enhanced Credit Scoring
+├─ Borrower profiles (income, employment)
+├─ Credit history simulation
+├─ Risk model customization
+└─ Auto-approve thresholds
+
+✅ Collections System
+├─ Late payment tracking
+├─ Restructuring options
+├─ Recovery mechanics
+└─ Collection agency (hire employees)
+
+✅ Securitization (Advanced)
+├─ Bundle loans into securities
+├─ Sell to institutional investors
+├─ Reduce risk exposure
+└─ Liquidity management
+
+2. Payment Gateway - NEW 🆕
+
+Core Mechanics:
+Process transactions → Detect fraud → Collect fees
+High volume, low margin business
+
+Gameplay Loop:
+typescriptTransaction Flow:
+1. Merchants sign up (acquire customers)
+2. Transactions come in (random events, high frequency)
+3. Process or Block (fraud detection mini-game)
+4. Collect fees (0.5-2% per transaction)
+5. Handle disputes/chargebacks
+6. Scale infrastructure (server costs)
+
+Example:
+├─ Minute 1: 100 transactions (Rp 50M volume)
+│  ├─ 95 legitimate (earn Rp 500K fees)
+│  ├─ 3 suspicious (fraud detection)
+│  └─ 2 chargebacks (lose Rp 100K)
+├─ Success rate determines reputation
+└─ Higher volume = more income but more risk
+
+Key Features:
+typescript✅ Merchant Acquisition
+├─ Onboard merchants (e-commerce, retail)
+├─ Integration types (API, checkout page, QR)
+├─ Pricing tiers (volume-based)
+└─ Churn management (keep merchants)
+
+✅ Fraud Detection System
+├─ Real-time transaction screening
+├─ ML-based risk scoring (simulated)
+├─ Manual review queue
+├─ False positive vs missed fraud balance
+└─ Fraud loss ratio (target: <0.1%)
+
+✅ Payment Methods
+├─ Credit/Debit cards
+├─ Bank transfers
+├─ E-wallets (GoPay, OVO, DANA)
+├─ QRIS (QR code)
+└─ Each method has different fees & risks
+
+✅ Infrastructure Management
+├─ Server capacity (uptime critical)
+├─ Transaction per second (TPS) limits
+├─ Upgrade infrastructure (cost vs capacity)
+├─ Downtime = reputation damage
+└─ DDoS attacks (random events)
+
+✅ Settlement & Cash Flow
+├─ T+1, T+2, T+7 settlement cycles
+├─ Working capital needs (pay merchants before banks pay you)
+├─ Cash flow management critical
+└─ Float income (interest on held funds)
+
+✅ Disputes & Chargebacks
+├─ Customer disputes (merchant error, fraud)
+├─ Chargeback costs (fee + lost transaction)
+├─ Win/lose dispute resolution
+└─ High chargeback ratio = bad reputation
+
+3. Leasing - NEW 🆕
+
+Core Mechanics:
+Buy assets → Lease to customers → Collect rent → Manage maintenance
+Asset management business
+
+Gameplay Loop:
+typescriptLeasing Flow:
+1. Purchase assets (vehicles, equipment)
+2. Lease to customers (monthly payments)
+3. Asset tracking (location, condition)
+4. Maintenance & repairs (costs)
+5. End of lease (return, buy-out, renew)
+6. Asset depreciation (value decreases)
+7. Portfolio optimization
+
+Example:
+├─ Buy 10 cars (Rp 2B total)
+├─ Lease for 3 years (Rp 80M/month income)
+├─ Maintenance cost (Rp 5M/month)
+├─ After 3 years: Residual value Rp 1B
+└─ Net profit: (80M × 36) - 2B - (5M × 36) + 1B = Rp 800M
+
+Key Features:
+typescript✅ Asset Types
+├─ Vehicles (cars, motorcycles, trucks)
+├─ Heavy equipment (excavators, cranes)
+├─ Office equipment (computers, printers)
+├─ Property (commercial real estate)
+└─ Each type has different:
+    ├─ Purchase cost
+    ├─ Depreciation rate
+    ├─ Maintenance cost
+    └─ Demand level
+
+✅ Asset Lifecycle
+├─ Purchase (capital expenditure)
+├─ Lease out (find customers)
+├─ Usage tracking (mileage, wear & tear)
+├─ Maintenance (scheduled & emergency)
+├─ Insurance (protect assets)
+├─ Depreciation (value loss)
+└─ Disposal (sell, scrap)
+
+✅ Customer Management
+├─ Lease applications (approve/reject)
+├─ Credit checks (like lending)
+├─ Late payments (penalties)
+├─ Damage charges (customer responsibility)
+└─ Early termination (fees)
+
+✅ Portfolio Optimization
+├─ Asset mix (diversification)
+├─ Utilization rate (leased vs idle)
+├─ Replacement cycle (old vs new assets)
+├─ Financing options (buy outright vs loan)
+└─ Residual value forecasting
+
+✅ Risk Management
+├─ Asset theft/loss
+├─ Customer default
+├─ Market value fluctuations
+├─ Obsolescence (tech assets)
+└─ Over-leveraging risk
+
+4. Pegadaian (Pawnshop) - NEW 🆕
+
+Core Mechanics:
+Accept collateral → Provide loan → Charge storage fee
+Hold item → Customer repays or forfeit
+Auction forfeited items
+
+Gameplay Loop:
+typescriptPawnshop Flow:
+1. Customer brings item (gold, electronics, etc)
+2. Appraise value (estimation mini-game)
+3. Offer loan (60-80% of value)
+4. Store item (storage fee)
+5. Customer repays + interest OR forfeits
+6. Auction forfeited items
+7. Profit from interest + storage + auction markup
+
+Example:
+├─ Customer pawns gold (appraised Rp 10M)
+├─ Loan: Rp 7M (70%)
+├─ Interest: 1.5%/month
+├─ Storage: Rp 50K/month
+├─ Option A: Customer repays Rp 7.5M after 3 months
+│  └─ Profit: Rp 500K + Rp 150K = Rp 650K
+├─ Option B: Customer forfeits
+│  └─ Auction gold for Rp 9.5M
+│  └─ Profit: Rp 2.5M (9.5M - 7M)
+
+Key Features:
+typescript✅ Item Appraisal
+├─ Gold (weight, purity)
+├─ Electronics (condition, market value)
+├─ Jewelry (estimation)
+├─ Vehicles (documents, condition)
+├─ Appraisal mini-game (accuracy matters)
+└─ Risk: Over-value = loss, Under-value = customer walks away
+
+✅ Loan Management
+├─ Loan-to-value ratio (conservative = safe)
+├─ Interest rates (higher than banks)
+├─ Loan duration (30, 60, 90 days typical)
+├─ Extension options (customer pays interest, extends time)
+└─ Default = keep item
+
+✅ Inventory Management
+├─ Storage capacity (physical space limit)
+├─ Storage costs (rent, security)
+├─ Item condition tracking
+├─ Insurance (protect inventory)
+└─ Theft risk (security investment)
+
+✅ Auction System
+├─ Forfeited items go to auction
+├─ Bidding mechanics (min price = loan amount)
+├─ Auction frequency (weekly, monthly)
+├─ Market demand (some items sell better)
+└─ Profit margin optimization
+
+✅ Risk Factors
+├─ Item value fluctuation (gold price)
+├─ Fake items (fraud detection)
+├─ Damage during storage
+├─ Regulatory compliance (max interest rates)
+└─ Reputation (fair vs exploitative)
+
+5. Koperasi (Credit Union) - NEW 🆕
+
+Core Mechanics:
+Collect deposits → Provide loans to members → Share profits
+Community-based, member-owned
+
+Gameplay Loop:
+typescriptKoperasi Flow:
+1. Recruit members (pay membership fee)
+2. Collect deposits (savings accounts)
+3. Provide loans to members (lower rates than banks)
+4. Collect loan repayments
+5. Calculate surplus (profit)
+6. Distribute dividends to members
+7. Grow membership & capital
+
+Example:
+├─ 100 members, Rp 500K membership each = Rp 50M capital
+├─ Members deposit Rp 1B total (3% interest)
+├─ Loan out Rp 800M (10% interest)
+├─ Income: Rp 80M (loan interest)
+├─ Expense: Rp 30M (deposit interest) + Rp 10M (operations)
+├─ Surplus: Rp 40M
+├─ Distribute: Rp 30M to members, Rp 10M reserve
+└─ Member satisfaction increases = more deposits
+
+Key Features:
+typescript✅ Membership Management
+├─ Recruit members (individuals, small businesses)
+├─ Membership tiers (regular, premium)
+├─ Member contributions (mandatory savings)
+├─ Member benefits (loan priority, dividends)
+└─ Democratic governance (voting, committees)
+
+✅ Dual Balance Sheet
+├─ ASSETS:
+│  ├─ Cash reserves
+│  ├─ Loans to members
+│  └─ Investments
+├─ LIABILITIES:
+│  ├─ Member deposits
+│  └─ Member equity
+└─ Must balance lending with deposit obligations
+
+✅ Loan Products (Member-focused)
+├─ Emergency loans (fast, small)
+├─ Business loans (micro-enterprise)
+├─ Housing loans (affordable)
+├─ Education loans (low interest)
+└─ All below market rates (social mission)
+
+✅ Savings Products
+├─ Regular savings (low interest)
+├─ Time deposits (higher interest)
+├─ Children's savings (education focus)
+└─ Retirement savings (long-term)
+
+✅ Profit Distribution
+├─ Calculate annual surplus
+├─ Allocate to:
+│  ├─ Member dividends (based on activity)
+│  ├─ Reserves (capital building)
+│  ├─ Education fund (member training)
+│  └─ Social programs (community)
+└─ Balance growth vs member benefits
+
+✅ Community Impact
+├─ Financial inclusion (serve underbanked)
+├─ Member education (financial literacy)
+├─ Social programs (scholarships, health)
+├─ Reputation in community
+└─ Regulatory compliance (koperasi laws)
+
+
+
+
+
+
+🛡️ TIPE C: INSURANCE
+
+1. LIFE INSURANCE: 
+FUTURE FEATURES LIST
+Priority 1: Core Product & Pricing ⭐⭐⭐
+✅ Multiple Product Types
+├─ Term Life (temporary protection)
+├─ Whole Life (lifetime + cash value)
+├─ Endowment (savings + protection)
+└─ Unit-Linked (investment + protection)
+
+✅ Age-Based Pricing
+├─ Actuarial mortality tables
+├─ Gender-based rates (female live longer)
+├─ Dynamic premium calculation
+└─ Risk-based pricing
+
+✅ Premium Calculation System
+├─ Mortality rate modeling
+├─ Safety loading (profit margin)
+├─ Expense ratio (overhead costs)
+└─ Product-specific multipliers
+
+✅ Policy Maturity & Expiration
+├─ Term life expires (no payout if survives)
+├─ Endowment matures (guaranteed payout)
+├─ Whole life continues until death
+└─ Time-based event system
+
+Priority 2: Underwriting & Risk Assessment ⭐⭐⭐
+typescript✅ Medical Underwriting
+├─ Health questionnaire (age, smoking, BMI)
+├─ Risk scoring algorithm (0-100)
+├─ Underwriting decisions:
+│  ├─ Accept Standard
+│  ├─ Accept Substandard (premium loading)
+│  ├─ Accept with Exclusions
+│  ├─ Postpone (health improvement)
+│  └─ Decline (too risky)
+└─ Impact on claim rates
+
+✅ Medical Examinations
+├─ Basic health check (height, weight, BP)
+├─ Blood tests (cholesterol, glucose)
+├─ ECG (heart health)
+├─ Full medical (comprehensive)
+├─ Cost vs benefit (exam cost vs risk reduction)
+└─ Required for large policies (>Rp 500M)
+
+✅ Risk Factors
+├─ Smoking status (huge risk +25%)
+├─ BMI (obesity risk)
+├─ Blood pressure (hypertension)
+├─ Cholesterol levels
+├─ Diabetes
+├─ Family history (hereditary)
+├─ Occupation (hazardous jobs)
+└─ Lifestyle (extreme sports, alcohol)
+
+✅ Adverse Selection Prevention
+├─ Stricter underwriting for large policies
+├─ Contestability period (2 years)
+├─ Material misrepresentation detection
+└─ Pre-existing condition exclusions
+
+Priority 3: Claims Management ⭐⭐
+typescript✅ Death Claim Types
+├─ Natural death (old age, illness)
+├─ Accidental death (car, falls)
+├─ Suicide (excluded in first 2 years)
+├─ Homicide (investigation required)
+└─ Illness (cancer, heart disease)
+
+✅ Claims Investigation System
+├─ Fraud detection (10-15% of claims)
+├─ Investigation triggers:
+│  ├─ Policy < 2 years old
+│  ├─ Large sum assured (>Rp 1B)
+│  ├─ Suspicious cause of death
+│  ├─ Multiple policies on same life
+│  └─ Beneficiary is stranger
+├─ Document verification:
+│  ├─ Death certificate
+│  ├─ Medical records
+│  ├─ Police report
+│  └─ Autopsy report
+└─ Investigation mini-game (find evidence)
+
+✅ Claim Decisions
+├─ Approve Full (100% payout)
+├─ Approve Partial (reduced amount)
+├─ Deny with Reason (fraud, exclusion)
+├─ Pending (need more info)
+└─ Reputation impact (fair vs aggressive)
+
+✅ Fraud Patterns
+├─ Material misrepresentation (lied about health)
+├─ Staged death (fake death certificate)
+├─ Beneficiary is murderer
+├─ Suicide within contestability
+└─ Pre-existing condition not disclosed
+
+Priority 4: Cash Value & Surrenders ⭐⭐
+typescript✅ Cash Value Accumulation (Whole Life, Endowment)
+├─ Premium allocation (insurance + savings)
+├─ Investment returns (3-5% annually)
+├─ Time-based growth
+└─ Cash value tracking
+
+✅ Policy Surrenders
+├─ Customer cancels policy early
+├─ Surrender value calculation
+├─ Cash payout (liquidity impact)
+├─ Lost future premiums
+└─ Surrender charges (early withdrawal)
+
+✅ Policy Loans
+├─ Borrow against cash value
+├─ Interest charged (8-10%)
+├─ Policy remains active
+├─ Loan balance tracking
+└─ Default if loan > cash value
+
+✅ Paid-Up Insurance
+├─ Stop paying premiums
+├─ Convert to reduced coverage
+├─ No cash value growth
+└─ Policy continues until death
+
+✅ Liquidity Management
+├─ Balance surrenders vs new sales
+├─ Maintain reserves for payouts
+├─ Cash flow forecasting
+└─ Liquidity crisis risk
+
+Priority 5: Distribution & Sales ⭐⭐
+typescript✅ Agent Management
+├─ Hire life insurance agents
+├─ Agent training program (cost: Rp 10M/agent)
+├─ Licensing exams (pass rate 70%)
+├─ Commission structure:
+│  ├─ First year: 40-60% of premium
+│  ├─ Renewal: 5-10% of premium
+│  └─ Persistency bonus
+├─ Agent performance tracking:
+│  ├─ Policies sold per month
+│  ├─ Average policy size
+│  ├─ Persistency rate
+│  └─ Customer satisfaction
+└─ Agent retention (high turnover)
+
+✅ Sales Channels
+├─ Career agents (exclusive)
+├─ Brokers (multi-company)
+├─ Bancassurance (bank partnerships)
+├─ Online direct sales (lower commission)
+└─ Workplace group insurance
+
+✅ Commission Economics
+├─ High upfront cost (40-60% year 1)
+├─ Long-term revenue stream (renewals)
+├─ Trade-off: Growth vs profitability
+└─ Agent productivity targets
+
+✅ Persistency Management
+├─ Track policy lapse rates
+├─ First-year persistency critical
+├─ Agent bonuses for retention
+└─ Customer service quality
+
+Priority 6: Reinsurance ⭐⭐
+typescript✅ Reinsurance Basics
+├─ Transfer risk to reinsurer
+├─ Protect against large claims
+├─ Capital relief (free up reserves)
+└─ Cost: 10-30% of premium ceded
+
+✅ Reinsurance Structures
+├─ Quota Share (share X% of all policies)
+├─ Surplus (reinsure amounts above retention)
+├─ Catastrophe Cover (pandemic, terrorism)
+└─ Facultative (case-by-case large policies)
+
+✅ Retention Limits
+├─ Set maximum per life (e.g., Rp 500M)
+├─ Reinsure excess amounts
+├─ Balance: Cost vs protection
+└─ Dynamic adjustment based on capital
+
+✅ Reinsurer Relationships
+├─ Select reinsurance partners
+├─ Negotiate terms (commission, rates)
+├─ Claims settlement with reinsurer
+└─ Reputation with reinsurers
+
+✅ Strategic Decisions
+├─ Self-insure vs reinsure trade-off
+├─ Optimize retention limits
+├─ Portfolio concentration risk
+└─ Capital efficiency
+
+Priority 7: Actuarial & Reserves ⭐
+typescript✅ Reserve Calculations
+├─ Set aside funds for future claims
+├─ Actuarial present value
+├─ Discount rate assumptions
+├─ Reserve adequacy testing
+└─ Regulatory minimum reserves
+
+✅ Mortality Assumptions
+├─ Expected vs actual mortality
+├─ Mortality improvement trends
+├─ Reserve adjustments
+└─ Surplus/deficit from mortality
+
+✅ Lapse Assumptions
+├─ Expected policy terminations
+├─ Impact on reserves
+├─ Lapse-supported pricing
+└─ Risk if lapses lower than expected
+
+✅ Expense Assumptions
+├─ Acquisition costs (agents, underwriting)
+├─ Maintenance costs (admin, customer service)
+├─ Expense ratio management
+└─ Economies of scale
+
+✅ Profit Testing
+├─ Projected cash flows
+├─ Profit emergence over time
+├─ IRR calculation
+└─ Product profitability analysis
+
+Priority 8: Regulatory & Compliance ⭐
+typescript✅ Solvency Requirements
+├─ Maintain minimum capital (RBC ratio)
+├─ Risk-based capital formula
+├─ Regulatory reporting (OJK)
+└─ Solvency margin monitoring
+
+✅ Product Approval
+├─ Submit products to regulator
+├─ Actuarial certification
+├─ Policyholder protection
+└─ Approval waiting period
+
+✅ Consumer Protection
+├─ Free-look period (14 days)
+├─ Policy illustration standards
+├─ Disclosure requirements
+└─ Complaint handling
+
+✅ Anti-Money Laundering (AML)
+├─ Customer due diligence
+├─ Beneficial owner identification
+├─ Large transaction reporting
+└─ Suspicious activity monitoring
+
+✅ Audit & Examination
+├─ Annual actuarial valuation
+├─ External audit
+├─ Regulatory examination
+└─ Compliance scoring
+
+Priority 9: Advanced Features ⭐
+typescript✅ Riders (Additional Benefits)
+├─ Accidental Death Benefit (double indemnity)
+├─ Waiver of Premium (if disabled)
+├─ Critical Illness (early payout)
+├─ Hospital Cash (daily hospitalization)
+└─ Each rider = additional premium
+
+✅ Group Life Insurance
+├─ Corporate clients (employee benefits)
+├─ Wholesale pricing (volume discount)
+├─ Simplified underwriting
+├─ Annual renewal
+└─ B2B sales channel
+
+✅ Participating Policies
+├─ Share profits with policyholders
+├─ Annual dividends
+├─ Bonus declarations
+└─ Smoothing reserves
+
+✅ Universal Life
+├─ Flexible premiums
+├─ Adjustable coverage
+├─ Transparent charges
+└─ Investment component
+
+✅ Annuities (Opposite of Life Insurance)
+├─ Longevity risk (not mortality)
+├─ Pension payouts
+├─ Retirement planning
+└─ Complementary product
+
+Priority 10: Analytics & Optimization ⭐
+typescript✅ Portfolio Analysis
+├─ Age distribution
+├─ Product mix
+├─ Average policy size
+├─ Premium persistency
+└─ Profitability by cohort
+
+✅ Mortality Experience
+├─ Actual vs expected deaths
+├─ A/E ratio (claims ratio for life)
+├─ Identify adverse selection
+└─ Adjust pricing
+
+✅ Lapse Experience
+├─ Policy termination rates
+├─ Duration analysis (when do policies lapse?)
+├─ Reasons for lapse
+└─ Retention strategies
+
+✅ Expense Analysis
+├─ Unit costs (per policy, per premium)
+├─ Expense efficiency
+├─ Overhead allocation
+└─ Cost reduction initiatives
+
+✅ Profitability Metrics
+├─ Embedded value (future profits)
+├─ New business value
+├─ Return on equity (ROE)
+├─ Operating profit
+└─ Solvency ratio
+
+🏥 HEALTH INSURANCE: FUTURE FEATURES LIST
+Priority 1: Core Product & Coverage ⭐⭐⭐
+typescript✅ Product Types
+├─ Individual Health (personal coverage)
+├─ Family Floater (shared coverage for family)
+├─ Critical Illness (cancer, heart attack, stroke)
+├─ Hospital Cash (daily hospitalization benefit)
+└─ Maternity Coverage (pregnancy & delivery)
+
+✅ Coverage Levels
+├─ Room type (ward, semi-private, private, suite)
+├─ Annual limit (Rp 50M, 100M, 500M, unlimited)
+├─ Co-insurance (80/20, 90/10, 100%)
+├─ Deductible (Rp 1M, 5M, 10M per year)
+└─ Coverage territory (Indonesia, Asia, Worldwide)
+
+✅ Premium Calculation
+├─ Age-based pricing (increases with age)
+├─ Pre-existing conditions loading
+├─ Family size multiplier
+├─ Occupation risk adjustment
+└─ Lifestyle factors (smoking, BMI)
+
+✅ Waiting Periods
+├─ Initial waiting period (30 days after purchase)
+├─ Pre-existing condition exclusion (2 years)
+├─ Maternity waiting period (9-12 months)
+└─ Specific illness waiting periods
+
+Priority 2: Network Management ⭐⭐⭐
+typescript✅ Hospital Network
+├─ Partner hospitals (cashless claims)
+├─ Non-network hospitals (reimbursement)
+├─ Hospital tier system:
+│  ├─ Tier 1: Public hospitals (basic)
+│  ├─ Tier 2: Private hospitals (standard)
+│  └─ Tier 3: Premium hospitals (expensive)
+├─ Network expansion costs
+└─ Hospital contract negotiations
+
+✅ Provider Relationships
+├─ Negotiate rates with hospitals
+├─ Volume discounts (more patients = better rates)
+├─ Claims settlement agreements
+├─ Direct billing arrangements
+└─ Hospital panel credentialing
+
+✅ Geographic Coverage
+├─ Urban areas (high hospital density)
+├─ Rural areas (limited access)
+├─ International coverage (medical tourism)
+└─ Emergency coverage abroad
+
+✅ Network Quality
+├─ Hospital ratings (service quality)
+├─ Patient satisfaction scores
+├─ Claims processing speed
+└─ Reputation impact
+
+Priority 3: Claims Management ⭐⭐⭐
+typescript✅ Claim Types
+├─ Hospitalization (inpatient)
+├─ Surgery (planned or emergency)
+├─ Outpatient treatment
+├─ Diagnostic tests (lab, imaging)
+├─ Pharmacy (medications)
+├─ Emergency room visits
+└─ Ambulance services
+
+✅ Claim Processing
+├─ Cashless claims (network hospitals)
+│  ├─ Pre-authorization required
+│  ├─ Real-time verification
+│  ├─ Direct payment to hospital
+│  └─ Fast patient experience
+├─ Reimbursement claims (non-network)
+│  ├─ Customer pays upfront
+│  ├─ Submit receipts & documents
+│  ├─ Review & approval process
+│  └─ Payment within 14-30 days
+└─ Processing time impact on reputation
+
+✅ Fraud Detection
+├─ Common fraud patterns:
+│  ├─ Unnecessary treatments (provider fraud)
+│  ├─ Inflated bills (upcoding)
+│  ├─ Fake hospitalization
+│  ├─ Pre-existing condition not disclosed
+│  └─ Bill padding (extra services)
+├─ Investigation triggers:
+│  ├─ High claim frequency
+│  ├─ Expensive procedures
+│  ├─ Same doctor/hospital repeatedly
+│  └─ Claim timing suspicious
+└─ Fraud detection mini-game
+
+✅ Medical Necessity Review
+├─ Is treatment medically necessary?
+├─ Are costs reasonable?
+├─ Pre-authorization for surgeries
+├─ Second opinion requirement
+└─ Approve/Partial/Deny decisions
+
+✅ Claim Ratio Management
+├─ Target: 70-85% (industry standard)
+├─ Too high = unprofitable
+├─ Too low = overpricing (lose customers)
+└─ Balance pricing vs coverage
+
+Priority 4: Underwriting & Risk ⭐⭐
+typescript✅ Medical Underwriting
+├─ Health questionnaire
+├─ Age & gender
+├─ Pre-existing conditions:
+│  ├─ Diabetes
+│  ├─ Hypertension
+│  ├─ Heart disease
+│  ├─ Cancer history
+│  └─ Chronic illnesses
+├─ Family medical history
+├─ Lifestyle (smoking, alcohol, exercise)
+└─ Occupation hazards
+
+✅ Underwriting Decisions
+├─ Accept Standard (normal premium)
+├─ Accept with Loading (higher premium)
+├─ Accept with Exclusions (specific conditions excluded)
+├─ Accept with Sublimits (cap on certain treatments)
+└─ Decline (uninsurable)
+
+✅ Medical Examinations
+├─ Basic health check
+├─ Blood tests (glucose, cholesterol)
+├─ BMI assessment
+├─ Blood pressure monitoring
+└─ Required for: Age >50 or large coverage
+
+✅ Pre-existing Conditions
+├─ Permanent exclusion
+├─ Temporary exclusion (2-4 years)
+├─ Coverage with sublimit
+├─ Premium loading (30-100%)
+└─ Impact on claim experience
+
+Priority 5: Wellness & Prevention ⭐⭐
+typescript✅ Wellness Programs
+├─ Annual health checkups (free)
+├─ Vaccination coverage
+├─ Health screening (cancer, diabetes)
+├─ Dental checkups
+└─ Vision tests
+
+✅ Preventive Care
+├─ Reduce future claims
+├─ Early disease detection
+├─ Chronic disease management
+├─ Health coaching
+└─ Cost: Small upfront investment vs big savings
+
+✅ Fitness Incentives
+├─ Gym membership discounts
+├─ Wearable device integration (step tracking)
+├─ Premium discounts for healthy lifestyle
+├─ Gamification (badges, challenges)
+└─ Customer engagement
+
+✅ Telemedicine
+├─ Online doctor consultations
+├─ 24/7 medical advice hotline
+├─ Prescription delivery
+├─ Cost savings (vs ER visits)
+└─ Customer convenience
+
+Priority 6: Pricing & Renewals ⭐⭐
+typescript✅ Premium Increases
+├─ Age-based increases (automatic at renewal)
+├─ Medical inflation (5-15% annually)
+├─ Claim experience adjustment
+├─ Portfolio loss ratio impact
+└─ Customer retention vs profitability
+
+✅ Renewal Management
+├─ Annual renewal process
+├─ Premium notices (30 days advance)
+├─ Non-renewal for high claimants
+├─ Loyalty discounts (no claims bonus)
+└─ Cross-selling (add family members)
+
+✅ No-Claim Bonus
+├─ Discount for claim-free years
+├─ 10-30% premium reduction
+├─ Accumulates over time
+├─ Lost if claims made
+└─ Customer retention strategy
+
+✅ Portability
+├─ Switch from competitor (bring coverage history)
+├─ No fresh waiting periods
+├─ Credit for claim-free years
+└─ Competitive advantage
+
+Priority 7: Group Health Insurance ⭐
+typescript✅ Corporate Plans
+├─ Employee benefits (company pays)
+├─ Wholesale pricing (30-50% discount)
+├─ Simplified underwriting (no medical exams)
+├─ Annual renewal with employer
+└─ B2B sales channel
+
+✅ Group Features
+├─ Uniform benefits (all employees same coverage)
+├─ Family coverage options
+├─ Cashless network critical
+├─ HR portal (enrollment, claims)
+└─ Group claims experience
+
+✅ Employer Relationships
+├─ Corporate sales team
+├─ RFP/bidding process
+├─ Annual negotiations
+├─ Retention (multi-year contracts)
+└─ Employer satisfaction
+
+Priority 8: Regulatory & Compliance ⭐
+typescript✅ BPJS Integration (Indonesia-specific)
+├─ Mandatory basic coverage (government)
+├─ Private insurance as supplement
+├─ Coordination of benefits
+└─ Regulatory requirements
+
+✅ Claim Settlement Ratio
+├─ Regulatory target: >85%
+├─ Public disclosure
+├─ Reputation impact
+└─ Penalties for low ratios
+
+✅ Product Approval
+├─ Submit to OJK
+├─ Actuarial certification
+├─ Policy wordings
+└─ Standardized benefits (minimum coverage)
+
+✅ Consumer Protection
+├─ Free-look period (15 days)
+├─ Policy transparency
+├─ Claim settlement timeframes
+└─ Grievance redressal
+
+Priority 9: Advanced Features ⭐
+typescript✅ Critical Illness Add-On
+├─ Lump sum payout on diagnosis
+├─ Cancer, heart attack, stroke, kidney failure
+├─ Separate from hospitalization
+├─ Supplement to regular health coverage
+└─ Higher premiums
+
+✅ Maternity Coverage
+├─ Normal delivery
+├─ C-section (higher cost)
+├─ Pre-natal care
+├─ Post-natal care
+└─ Long waiting period (9-12 months)
+
+✅ International Coverage
+├─ Medical emergencies abroad
+├─ Medical evacuation
+├─ Repatriation
+├─ Travel insurance integration
+└─ Higher premiums
+
+✅ Dental & Vision
+├─ Separate or integrated
+├─ Routine care (cleanings, checkups)
+├─ Major procedures (root canal, braces)
+├─ Eyeglasses & contact lenses
+└─ Optional add-ons
+
+🚗 VEHICLE INSURANCE: FUTURE FEATURES LIST
+Priority 1: Core Product Types ⭐⭐⭐
+typescript✅ Coverage Types
+├─ Third-Party Liability (mandatory, basic)
+│  ├─ Covers damage to others
+│  ├─ Bodily injury to third parties
+│  ├─ Property damage to third parties
+│  ├─ Lowest premiums
+│  └─ Required by law
+│
+└─ Comprehensive (optional, full coverage)
+    ├─ Third-party liability PLUS:
+    ├─ Own damage (collision, theft)
+    ├─ Fire & natural disasters
+    ├─ Personal accident cover
+    └─ Higher premiums
+
+✅ Vehicle Types
+├─ Motorcycles (2-wheelers)
+├─ Private cars (sedan, SUV, MPV)
+├─ Commercial vehicles (taxi, rideshare)
+├─ Trucks & heavy vehicles
+└─ Luxury/exotic cars (special handling)
+
+✅ Premium Factors
+├─ Vehicle value (IDV - Insured Declared Value)
+├─ Vehicle age (depreciation)
+├─ Vehicle make & model (claim history)
+├─ Engine capacity (cc)
+├─ Usage type (personal vs commercial)
+├─ Geographic zone (urban vs rural)
+└─ Driver profile (age, experience)
+
+✅ Add-On Covers
+├─ Zero Depreciation (full claim, no depreciation)
+├─ Engine Protection (flood, hydrostatic lock)
+├─ Roadside Assistance (towing, fuel delivery)
+├─ Passenger Cover (additional personal accident)
+├─ NCB Protector (retain no-claim bonus even if claimed)
+└─ Return to Invoice (get original price if total loss)
+
+Priority 2: Claims Management ⭐⭐⭐
+typescript✅ Claim Types
+├─ Collision (accident damage)
+├─ Theft (entire vehicle stolen)
+├─ Fire (vehicle burnt)
+├─ Natural disasters (flood, earthquake, fallen tree)
+├─ Vandalism (malicious damage)
+├─ Third-party liability (damage to others)
+└─ Personal accident (driver/passenger injury)
+
+✅ Claim Process
+├─ Accident reporting (FIR/police report)
+├─ Vehicle inspection (surveyor visit)
+├─ Damage assessment (repair cost estimate)
+├─ Workshop approval (network vs non-network)
+├─ Repair authorization
+├─ Settlement:
+│  ├─ Cashless (network garage)
+│  ├─ Reimbursement (non-network)
+│  └─ Total loss (IDV payout)
+└─ Processing time (7-14 days target)
+
+✅ Total Loss
+├─ Repair cost >75% of IDV = total loss
+├─ Payout: IDV minus depreciation (or full with zero-dep)
+├─ Salvage recovery (sell damaged vehicle)
+├─ Customer surrenders vehicle
+└─ Policy terminates
+
+✅ Fraud Detection
+├─ Staged accidents (fake collisions)
+├─ Inflated repair bills
+├─ Pre-existing damage claimed
+├─ Theft collusion (owner involved)
+├─ VIN tampering (stolen vehicles)
+└─ Investigation triggers:
+    ├─ Multiple claims in short period
+    ├─ High-value claims
+    ├─ Claim within 30 days of purchase
+    └─ Inconsistent damage patterns
+
+✅ Surveyor Network
+├─ Hire vehicle surveyors
+├─ Inspect damage & assess costs
+├─ Detect fraud
+├─ Negotiate with workshops
+└─ Surveyor quality impacts claim accuracy
+
+Priority 3: Repair Network ⭐⭐⭐
+typescript✅ Workshop Partnerships
+├─ Authorized dealerships (OEM parts, premium)
+├─ Multi-brand workshops (standard service)
+├─ Local garages (basic repairs, cheap)
+└─ Network expansion (geographic coverage)
+
+✅ Cashless Repairs
+├─ Customer approval for repairs
+├─ Direct payment to workshop
+├─ Quality assurance
+├─ Repair guarantee (3-6 months)
+└─ Customer satisfaction
+
+✅ Workshop Negotiations
+├─ Labor rates (per hour)
+├─ Parts markup (dealer vs aftermarket)
+├─ Volume discounts (more claims = better rates)
+├─ Repair turnaround time (SLA)
+└─ Quality standards
+
+✅ Spare Parts
+├─ Original (OEM) - expensive, best quality
+├─ Aftermarket - cheaper, variable quality
+├─ Reconditioned - cheapest, lower quality
+└─ Parts depreciation (reduce payout for old vehicles)
+
+✅ Depreciation Schedules
+├─ 0-6 months: 0% depreciation (new car)
+├─ 6-12 months: 5% depreciation
+├─ 1-2 years: 10-15%
+├─ 2-3 years: 20-25%
+├─ 3-5 years: 30-40%
+└─ >5 years: 50%+
+
+Priority 4: Underwriting & Risk ⭐⭐
+typescript✅ Vehicle Inspection
+├─ Pre-insurance inspection (used cars >3 years)
+├─ Photo documentation (all angles)
+├─ VIN verification (anti-theft)
+├─ Existing damage recording
+├─ Odometer reading
+└─ Inspection cost vs risk
+
+✅ Driver Profile
+├─ Age (young drivers = high risk)
+├─ Driving experience (years licensed)
+├─ Claim history (past accidents)
+├─ Traffic violations (speeding tickets)
+├─ Occupation (certain jobs riskier)
+└─ Geographic location (urban = more accidents)
+
+✅ Risk Pricing
+├─ High-risk: Young male, sports car, urban
+├─ Low-risk: Middle-aged, sedan, suburban
+├─ Premium loading (up to 100% for high risk)
+├─ Decline criteria (too many past claims)
+└─ Dynamic pricing (telematics-based)
+
+✅ Anti-Theft Measures
+├─ GPS tracking (discount 5-10%)
+├─ Steering lock
+├─ Alarm systems
+├─ Secure parking (garage vs street)
+└─ Risk reduction = lower premiums
+
+Priority 5: No-Claim Bonus (NCB) ⭐⭐
+typescript✅ NCB System
+├─ Discount for claim-free years
+├─ Accumulates annually:
+│  ├─ 1 year: 20% discount
+│  ├─ 2 years: 25% discount
+│  ├─ 3 years: 35% discount
+│  ├─ 4 years: 45% discount
+│  └─ 5 years: 50% discount (max)
+├─ Lost if any claim made
+└─ Transferable to new vehicle
+
+✅ NCB Protector
+├─ Optional add-on (pay 10-20% more)
+├─ Retain NCB even if 1-2 claims
+├─ Popular with high-NCB customers
+└─ Profitable add-on for insurers
+
+✅ Customer Retention
+├─ NCB creates switching cost
+├─ Competitors can match NCB (portability)
+├─ Loyalty reward programs
+└─ Renewal incentives
+
+Priority 6: Telematics & Usage-Based ⭐⭐
+typescript✅ Telematics Insurance
+├─ Install GPS/OBD device in vehicle
+├─ Track driving behavior:
+│  ├─ Speed (harsh acceleration/braking)
+│  ├─ Distance driven
+│  ├─ Time of day (night driving riskier)
+│  ├─ Route types (highway vs city)
+│  └─ Harsh cornering
+├─ Good drivers get discounts (up to 30%)
+├─ Real-time feedback (improve driving)
+└─ Theft recovery (GPS tracking)
+
+✅ Pay-As-You-Drive
+├─ Premium based on kilometers driven
+├─ Low mileage = low premium
+├─ Ideal for occasional drivers
+├─ Requires odometer verification
+└─ Behavioral incentive (drive less = save money)
+
+✅ Gamification
+├─ Driving score (0-100)
+├─ Weekly feedback
+├─ Challenges & rewards
+├─ Leaderboards
+└─ Customer engagement
+
+Priority 7: Third-Party Claims ⭐⭐
+typescript✅ Liability Management
+├─ Your customer hits someone else
+├─ Victim files claim against your customer
+├─ You defend your customer
+├─ Assess liability (fault determination)
+└─ Settle or litigate
+
+✅ Liability Scenarios
+├─ 100% at-fault (your customer caused accident)
+├─ 50/50 (shared fault)
+├─ 0% at-fault (victim fault, your customer victim)
+└─ Contributory negligence
+
+✅ Legal Defense
+├─ Hire lawyers (cost center)
+├─ Court cases (time-consuming)
+├─ Settlement negotiations (faster, cheaper)
+├─ Lawsuit management
+└─ Reputation risk (aggressive vs fair)
+
+✅ Personal Injury Claims
+├─ Medical expenses
+├─ Lost wages
+├─ Pain & suffering
+├─ Permanent disability
+└─ Death claims (highest payouts)
+
+Priority 8: Renewals & Retention ⭐⭐
+typescript✅ Annual Renewals
+├─ Vehicle insurance = 1 year term
+├─ Renewal notices (30 days advance)
+├─ Premium adjustments:
+│  ├─ Vehicle depreciation (IDV reduction)
+│  ├─ NCB update (if claim-free)
+│  ├─ Age increase (if driver birthday)
+│  └─ General rate changes
+├─ Cross-selling (upgrade to comprehensive)
+└─ Retention strategies
+
+✅ Lapse Management
+├─ Grace period (30-90 days)
+├─ Re-inspection required after lapse
+├─ Lost NCB if lapse too long
+├─ Win-back campaigns
+└─ Competitor poaching risk
+
+✅ Policy Transfers
+├─ Sell vehicle (transfer policy to new owner)
+├─ Buy new vehicle (transfer NCB)
+├─ Ownership change process
+└─ Administrative fees
+
+Priority 9: Advanced Features ⭐
+typescript✅ Multi-Vehicle Discounts
+├─ Insure 2+ vehicles (fleet discount)
+├─ 5-15% discount
+├─ Family fleet management
+└─ Commercial fleet insurance
+
+✅ Rideshare/Commercial
+├─ Uber/Grab drivers (commercial use)
+├─ Higher risk (more miles, multiple drivers)
+├─ Higher premiums (2-3x personal)
+├─ Special coverage (passenger liability)
+└─ Separate product line
+
+✅ Electric Vehicles (EV)
+├─ Battery coverage (expensive to replace)
+├─ Charging equipment
+├─ Specialized repair network
+├─ Different risk profile (fewer accidents?)
+└─ Premium adjustments (still emerging data)
+
+✅ Autonomous Vehicles (Future)
+├─ Liability shift (manufacturer vs driver)
+├─ New risk models
+├─ Lower accident rates?
+└─ Product liability insurance
+
+🏠 PROPERTY INSURANCE: FUTURE FEATURES LIST
+Priority 1: Core Property Types ⭐⭐⭐
+typescript✅ Property Types
+├─ Residential (houses, apartments)
+│  ├─ Owner-occupied
+│  ├─ Rented out (landlord insurance)
+│  └─ Condominiums
+├─ Commercial (offices, shops, factories)
+│  ├─ Office buildings
+│  ├─ Retail shops
+│  ├─ Warehouses
+│  └─ Manufacturing facilities
+├─ Agricultural (farms, plantations)
+└─ Special properties (hotels, malls)
+
+✅ Coverage Types
+├─ Building Structure (walls, roof, foundation)
+├─ Contents (furniture, electronics, belongings)
+├─ Both (structure + contents package)
+└─ Loss of Rent (rental income protection)
+
+✅ Perils Covered
+├─ Fire & Lightning
+├─ Explosion
+├─ Natural disasters:
+│  ├─ Earthquake (usually add-on)
+│  ├─ Flood (usually excluded or add-on)
+│  ├─ Storm/Cyclone
+│  └─ Landslide
+├─ Theft & Burglary
+├─ Vandalism
+├─ Water damage (burst pipes)
+└─ Terrorism (optional add-on)
+
+✅ Premium Calculation
+├─ Property value (rebuild cost)
+├─ Property type (residential vs commercial)
+├─ Construction type (concrete vs wood)
+├─ Location (urban, rural, coastal)
+├─ Age of property (older = higher risk)
+├─ Security measures (alarm, CCTV, guards)
+└─ Occupancy status (occupied vs vacant)
+
+Priority 2: Risk Assessment ⭐⭐⭐
+typescript✅ Property Survey
+├─ Pre-insurance inspection (mandatory)
+├─ Building condition assessment
+├─ Construction materials (fire-resistant?)
+├─ Electrical wiring (old/hazardous?)
+├─ Plumbing condition
+├─ Fire safety equipment (extinguishers, sprinklers)
+├─ Security systems (alarms, cameras)
+├─ Surrounding hazards (gas station nearby?)
+└─ Photo documentation
+
+✅ Location Risk
+├─ Geographic hazards:
+│  ├─ Flood zone (near river/coast)
+│  ├─ Earthquake zone (seismic activity)
+│  ├─ Wildfire risk (forested areas)
+│  └─ Crime rate (theft risk)
+├─ Fire protection:
+│  ├─ Distance to fire station
+│  ├─ Water supply availability
+│  └─ Fire hydrant access
+└─ Premium loading based on location
+
+✅ Construction Classification
+├─ Class A (fire-resistant, concrete, steel)
+│  └─ Lowest premiums
+├─ Class B (ordinary, brick, wood frame)
+│  └─ Medium premiums
+├─ Class C (combustible, wood, thatch)
+│  └─ Highest premiums (or uninsurable)
+└─ Fire rating affects pricing
+
+✅ Occupancy Risk
+├─ Owner-occupied (lowest risk)
+├─ Rented (medium risk, tenant behavior)
+├─ Vacant (high risk, no supervision)
+├─ Seasonal (vacation homes, moderate risk)
+└─ Occupancy type impacts premiums
+
+Priority 3: Claims Management ⭐⭐⭐
+typescript✅ Claim Types
+├─ Total Loss (property destroyed, >75% damage)
+├─ Partial Loss (repairable damage)
+├─ Contents Claim (belongings damaged/stolen)
+├─ Additional Living Expenses (hotel if uninhabitable)
+└─ Loss of Rent (income loss for landlords)
+
+✅ Claim Process
+├─ Immediate notification (24-48 hours)
+├─ Emergency mitigation (prevent further damage)
+├─ Loss adjuster appointment
+├─ Site inspection & documentation
+├─ Damage assessment & valuation
+├─ Repair/replacement estimate
+├─ Settlement:
+│  ├─ Cash settlement (customer arranges repairs)
+│  ├─ Repair settlement (insurer arranges)
+│  └─ Replacement (buy equivalent property)
+└─ Processing time (15-60 days)
+
+✅ Loss Adjusters
+├─ Hire independent surveyors
+├─ Assess damage extent
+├─ Verify policy coverage
+├─ Negotiate settlement amount
+├─ Detect fraud
+└─ Adjuster quality impacts accuracy
+
+✅ Valuation Methods
+├─ Replacement Cost (rebuild at today's prices)
+├─ Actual Cash Value (replacement minus depreciation)
+├─ Market Value (selling price)
+├─ Agreed Value (fixed at policy start)
+└─ Indemnity principle (don't profit from claim)
+
+✅ Under-insurance
+├─ Customer insures Rp 500M, actual value Rp 1B
+├─ Average clause applies:
+│  └─ Payout = (Insured / Actual) × Loss
+│  └─ Example: (500M / 1B) × 600M loss = 300M payout
+├─ Customer bears proportional loss
+├─ Educate on adequate coverage
+└─ Annual revaluation needed
+
+Priority 4: Catastrophe Management ⭐⭐⭐
+typescript✅ Natural Disasters
+├─ Earthquake (high severity, low frequency)
+├─ Flood (medium severity, medium frequency)
+├─ Storm/Typhoon (medium severity, seasonal)
+├─ Tsunami (extreme severity, very rare)
+└─ Volcanic eruption (regional risk)
+
+✅ Catastrophe Modeling
+├─ Identify high-risk zones
+├─ Historical loss data
+├─ Probable Maximum Loss (PML)
+├─ Portfolio concentration risk
+└─ Avoid over-exposure in one area
+
+✅ CAT Risk Management
+├─ Geographic diversification
+├─ Limit exposure per zone
+├─ Premium loading for high-risk areas
+├─ Decline coverage in extreme risk zones
+└─ Mandatory reinsurance for CAT exposure
+
+✅ Catastrophe Claims
+├─ Mass claims (hundreds simultaneously)
+├─ Emergency response teams
+├─ Expedited processing
+├─ Cash advances (immediate relief)
+├─ Regulatory pressure (fast settlement)
+└─ Reputational impact (disaster response)
+
+✅ Reinsurance (Critical)
+├─ CAT excess-of-loss reinsurance
+├─ Protect against major disasters
+├─ Example: Retain Rp 10B, reinsure above
+├─ Cost: 20-40% of premiums
+└─ Essential for solvency (avoid bankruptcy)
+
+Priority 5: Fraud Detection ⭐⭐
+typescript✅ Fraud Patterns
+├─ Arson (intentional fire to claim)
+├─ Staged theft (fake burglary)
+├─ Inflated claims (exaggerate damage/loss)
+├─ Pre-existing damage (claim old damage as new)
+├─ False contents (claim items never owned)
+└─ Property already damaged at policy start
+
+✅ Investigation Triggers
+├─ Recent policy purchase (<3 months)
+├─ Multiple claims in short period
+├─ High-value claims (>Rp 500M)
+├─ Suspicious fire origin
+├─ No fire brigade report (small fire, big claim)
+├─ Inconsistent stories (conflicting statements)
+└─ Financial distress (mortgage default, bankruptcy)
+
+✅ Investigation Tools
+├─ Fire investigation (accelerant detection)
+├─ Forensic accounting (verify valuations)
+├─ Social media checks (lifestyle vs claimed loss)
+├─ Neighbor interviews
+├─ Police reports (corroboration)
+└─ Private investigators
+
+✅ Fraud Outcomes
+├─ Approve Full (legitimate claim)
+├─ Approve Reduced (some inflation detected)
+├─ Deny (fraud proven)
+├─ Legal Action (criminal prosecution)
+└─ Reputation impact (fair vs aggressive)
+
+Priority 6: Specialized Covers ⭐⭐
+typescript✅ Landlord Insurance
+├─ Rental income protection (tenant defaults)
+├─ Tenant damage coverage
+├─ Legal expenses (eviction costs)
+├─ Property management liability
+└─ Higher premiums than owner-occupied
+
+✅ Condominium Insurance
+├─ Building coverage (by HOA/management)
+├─ Unit improvements (by owner)
+├─ Personal property (by owner)
+├─ Loss assessment (special assessments)
+└─ Complex coverage coordination
+
+✅ Valuable Items
+├─ Jewelry & art (separate limits)
+├─ Electronics (depreciation schedules)
+├─ Collectibles (appraisals required)
+├─ Cash limits (typically Rp 5-10M max)
+└─ Scheduled valuables (itemized coverage)
+
+✅ Business Interruption
+├─ Loss of income (business closed due to damage)
+├─ Fixed costs continue (salaries, rent)
+├─ Extra expenses (temporary location)
+├─ Waiting period (7-30 days)
+└─ Critical for commercial properties
+
+✅ Liability Coverage
+├─ Visitor injury on property (slip & fall)
+├─ Falling objects injure passersby
+├─ Property maintenance negligence
+├─ Legal defense costs
+└─ Add-on or included in comprehensive
+
+Priority 7: Premium Optimization ⭐⭐
+typescript✅ Risk Mitigation Discounts
+├─ Security systems (5-15% discount)
+│  ├─ CCTV cameras
+│  ├─ Alarm systems (monitored)
+│  ├─ Security guards (24/7)
+│  └─ Gated community
+├─ Fire protection (10-20% discount)
+│  ├─ Sprinkler systems
+│  ├─ Fire extinguishers
+│  ├─ Fire-resistant construction
+│  └─ Proximity to fire station
+├─ Disaster-resistant features (5-10% discount)
+│  ├─ Earthquake-resistant design
+│  ├─ Elevated foundation (flood)
+│  └─ Storm shutters
+└─ Multi-policy discount (bundle with auto, etc)
+
+✅ Claims-Free Discount
+├─ No-claim bonus (similar to auto)
+├─ 5-10% per claim-free year
+├─ Up to 30-40% max discount
+├─ Lost if claim made
+└─ Customer retention strategy
+
+✅ Higher Deductibles
+├─ Customer bears first Rp X of loss
+├─ Higher deductible = lower premium
+├─ Options: Rp 1M, 5M, 10M, 25M
+├─ Encourages claim prevention (small losses)
+└─ Reduces claim frequency (admin savings)
+
+✅ Annual Revaluation
+├─ Property values change (appreciation)
+├─ Construction costs increase (inflation)
+├─ Under-insurance risk
+├─ Adjust sum insured annually
+└─ Premium increases but adequate coverage
+
+Priority 8: Commercial Property ⭐⭐
+typescript✅ Industrial Risks
+├─ Manufacturing facilities (fire, machinery breakdown)
+├─ Warehouses (stock insurance)
+├─ Factories (equipment, production loss)
+├─ Power plants (high-value assets)
+└─ Specialized underwriting (engineering surveys)
+
+✅ Retail & Hospitality
+├─ Shopping malls (high footfall liability)
+├─ Hotels (guest safety, contents)
+├─ Restaurants (kitchen fire risk)
+├─ Office buildings (business interruption)
+└─ Higher liability limits needed
+
+✅ Commercial Enhancements
+├─ Equipment Breakdown
+├─ Spoilage (refrigeration failure)
+├─ Machinery insurance
+├─ Boiler & pressure vessel
+└─ Electronic equipment (all risks)
+
+✅ Tenant Insurance
+├─ Commercial tenants (rented spaces)
+├─ Leasehold improvements
+├─ Business contents
+├─ Liability to landlord
+└─ Loss of business income
+
+Priority 9: Regulatory & Compliance ⭐
+typescript✅ Property Valuation Standards
+├─ Professional appraisals (certified)
+├─ Replacement cost methodology
+├─ Depreciation schedules
+├─ Periodic revaluation (every 3 years)
+└─ Regulatory requirements
+
+✅ Claim Settlement Norms
+├─ Time limits (settle within X days)
+├─ Interest on delayed payments
+├─ Grievance mechanisms
+├─ Ombudsman complaints
+└─ Regulatory penalties
+
+✅ Fire Brigade NOC
+├─ Fire department approval (commercial)
+├─ Safety compliance certificate
+├─ Fire extinguisher inspection
+├─ Emergency exit signage
+└─ Mandatory for policy issuance
+
+✅ Municipal Approvals
+├─ Building permits (legal construction)
+├─ Occupancy certificates
+├─ Land ownership proof
+├─ Structural stability certificate
+└─ Documentation requirements
+
+Priority 10: Advanced Features ⭐
+typescript✅ Smart Home Integration
+├─ IoT sensors (water leak, smoke)
+├─ Real-time alerts (prevent damage)
+├─ Automated shut-offs (water valves)
+├─ Premium discounts (risk mitigation)
+└─ Claims prevention
+
+✅ Green Building Discounts
+├─ Eco-friendly construction (LEED certified)
+├─ Sustainable materials (lower fire risk?)
+├─ Energy efficiency (lower claims?)
+├─ Premium credits (encourage green)
+└─ Marketing advantage
+
+✅ Parametric Insurance
+├─ Automatic payouts (no adjuster needed)
+├─ Triggered by event (e.g., earthquake >6.0 magnitude)
+├─ Instant claims (within hours)
+├─ No dispute (objective trigger)
+└─ Emerging product (blockchain-based)
+
+✅ Mortgage Requirements
+├─ Lenders mandate insurance (loan protection)
+├─ Mortgagee clause (bank as beneficiary)
+├─ Continuous coverage (no lapse allowed)
+├─ Force-placed insurance (if customer lapses)
+└─ Automatic renewal from loan servicing
+
+
+
+
+📈 TIPE D: INVESTMENT MANAGEMENT
+
+1. Venture Capital - CURRENT ✅
+
+Current State:
+✅ Deal flow generation
+✅ Investment decisions
+✅ Valuation changes
+✅ Exit opportunities
+✅ Failure mechanics
+Future Features:
+typescript✅ Due Diligence
+├─ Detailed startup analysis (mini-game)
+├─ Founder background checks
+├─ Market sizing
+├─ Competitive analysis
+├─ Financial projections review
+└─ Score affects success probability
+
+✅ Active Management
+├─ Board seats (influence strategy)
+├─ Follow-on rounds (protect stake or dilute)
+├─ Pivot decisions (help struggling startups)
+├─ Recruit executives (improve team)
+└─ Time/resource allocation
+
+✅ Syndicate Network
+├─ Co-invest with other VCs
+├─ Lead vs follow decisions
+├─ Reputation with co-investors
+├─ Deal flow from network
+└─ Competitive dynamics
+
+✅ Fund Lifecycle
+├─ Raise Fund I (from LPs)
+├─ 5-year investment period
+├─ 5-year harvest period
+├─ Return capital + profit to LPs
+├─ Raise Fund II (if successful)
+└─ Multi-fund management
+```
+
+---
+
+## **2. Private Equity - NEW 🆕**
+
+### **Core Mechanics:**
+```
+Buy mature companies → Restructure → Increase value → Exit
+Larger deals, more control, operational focus
+Gameplay Loop:
+typescriptPE Flow:
+1. Target screening (find acquisition targets)
+2. Due diligence (deep analysis)
+3. Leveraged buyout (use debt + equity)
+4. Operational improvements (100 days plan)
+5. Value creation (grow revenue, cut costs)
+6. Exit (IPO or sell to strategic buyer)
+
+Example:
+├─ Buy company: Rp 500B (100B equity + 400B debt)
+├─ EBITDA: Rp 50B/year (10% yield)
+├─ Improve operations:
+│  ├─ Revenue growth: 50B → 70B (+40%)
+│  ├─ Cost reduction: 30B → 25B (-17%)
+│  └─ New EBITDA: 70B - 25B = 45B (was 20B)
+├─ Exit after 5 years: Sell for Rp 900B (12x EBITDA)
+├─ Repay debt: Rp 400B
+├─ Return: Rp 500B (5x equity)
+└─ Net profit: Rp 400B on Rp 100B investment (4x)
+Key Features:
+typescript✅ LBO Modeling
+├─ Deal structuring (debt/equity mix)
+├─ Interest coverage (can company service debt?)
+├─ Debt covenants (restrictions)
+├─ Refinancing options
+└─ Default risk (over-leveraging)
+
+✅ Operational Improvements
+├─ 100-day plan (quick wins)
+├─ Management changes (hire/fire)
+├─ Cost cutting initiatives
+├─ Revenue growth strategies
+├─ Technology upgrades
+├─ International expansion
+└─ Each initiative costs money but increases value
+
+✅ Portfolio Management
+├─ Active involvement (board meetings)
+├─ Monthly/quarterly reporting
+├─ Performance vs plan tracking
+├─ Intervention for underperformers
+└─ Multiple company management
+
+✅ Exit Strategies
+├─ IPO (go public, highest returns)
+├─ Strategic sale (to competitor)
+├─ Secondary buyout (sell to another PE)
+├─ Dividend recapitalization (extract cash)
+└─ Timing matters (market conditions)
+
+## **3. Hedge Fund - NEW 🆕**
+
+### **Core Mechanics:**
+```
+Trade public securities → Generate alpha → Charge performance fees
+High frequency, market timing, derivatives
+Gameplay Loop:
+typescriptHedge Fund Flow:
+1. Raise capital from investors (AUM)
+2. Choose strategy (long/short equity, macro, arbitrage)
+3. Execute trades (stocks, bonds, currencies, commodities)
+4. Manage risk (leverage, hedging)
+5. Generate returns (beat benchmark)
+6. Charge fees (2% management + 20% performance)
+
+Example Month:
+├─ AUM: Rp 10T
+├─ Strategy: Long/Short Equity
+├─ Go long: Tech stocks (Rp 6T)
+├─ Go short: Retail stocks (Rp 4T)
+├─ Month end:
+│  ├─ Tech +10% = +Rp 600B
+│  ├─ Retail -5% = +Rp 200B (profit from short)
+│  └─ Total return: +Rp 800B (8%)
+├─ Management fee: Rp 16.7B (2% annual / 12)
+├─ Performance fee: Rp 160B (20% of Rp 800B)
+└─ Total earned: Rp 176.7B this month!
+Key Features:
+typescript✅ Trading Strategies
+├─ Long/Short Equity (buy winners, short losers)
+├─ Global Macro (bet on economic trends)
+├─ Event-Driven (M&A, bankruptcy)
+├─ Quantitative (algorithm-based)
+├─ Arbitrage (exploit price differences)
+└─ Each has different risk/return profile
+
+✅ Market Mechanics
+├─ Stock price movements (simulated)
+├─ Economic indicators (GDP, inflation, rates)
+├─ News events (move markets)
+├─ Volatility (VIX tracking)
+└─ Correlations (diversification)
+
+✅ Risk Management
+├─ Value at Risk (VaR) calculation
+├─ Leverage limits (use borrowed money)
+├─ Stop losses (automatic exit)
+├─ Hedging (protect positions)
+├─ Stress testing (what-if scenarios)
+└─ Margin calls (forced liquidation risk)
+
+✅ Investor Relations
+├─ Monthly letters (report performance)
+├─ Redemptions (investors withdraw)
+├─ Lockup periods (can't withdraw immediately)
+├─ High water mark (only charge fees above previous peak)
+└─ Reputation (track record matters)
+
+✅ Compliance
+├─ Regulatory reporting
+├─ Insider trading rules
+├─ Position limits
+├─ Disclosure requirements
+└─ Fines for violations
+
+## **4. Mutual Fund/Reksadana - NEW 🆕**
+
+### **Core Mechanics:**
+```
+Pool retail investor money → Buy diversified portfolio → Charge management fee
+Regulated, transparent, mass market
+Gameplay Loop:
+typescriptMutual Fund Flow:
+1. Design fund (stock fund, bond fund, balanced)
+2. Market to retail investors
+3. Collect subscriptions (Rp 10K minimum)
+4. Invest according to mandate
+5. Calculate daily NAV (Net Asset Value)
+6. Handle redemptions
+7. Charge management fee (0.5-2% annually)
+8. Compete with other funds (performance ranking)
+
+Example:
+├─ Launch: Stock Fund
+├─ AUM: Rp 100B (10 million investors × Rp 10K avg)
+├─ Buy portfolio: 50 stocks, diversified
+├─ Year 1 return: +15% (vs market +10%)
+├─ Attract more money: AUM grows to Rp 500B
+├─ Management fee: Rp 7.5B (1.5% of Rp 500B)
+└─ Ranking: Top 10% (5-star rating)
+Key Features:
+typescript✅ Fund Design
+├─ Asset allocation (stocks, bonds, cash)
+├─ Investment mandate (growth, income, balanced)
+├─ Risk profile (conservative, moderate, aggressive)
+├─ Minimum investment
+├─ Fund size limits
+└─ Regulatory compliance
+
+✅ Portfolio Management
+├─ Stock selection (fundamental analysis)
+├─ Rebalancing (maintain target allocation)
+├─ Dividends (distribute or reinvest)
+├─ Tax efficiency
+└─ Benchmark tracking (active vs passive)
+
+✅ Distribution
+├─ Banks (bancassurance model)
+├─ Online platforms (e-commerce)
+├─ Direct sales (lower fees)
+├─ Workplace retirement plans
+└─ Marketing campaigns
+
+✅ Performance Tracking
+├─ Daily NAV calculation
+├─ Returns (1-month, 1-year, 3-year)
+├─ Benchmark comparison (beat index?)
+├─ Rankings (vs peer funds)
+├─ Star ratings (Morningstar style)
+└─ Fund flow (subscriptions - redemptions)
+
+✅ Investor Services
+├─ Account statements
+├─ Tax reports
+├─ Educational content
+├─ Customer support
+└─ Mobile app
+
+## **5. Family Office - NEW 🆕**
+
+### **Core Mechanics:**
+```
+Manage ultra-wealthy family's assets → Preserve & grow wealth
+Long-term, holistic, private
+Gameplay Loop:
+typescriptFamily Office Flow:
+1. Onboard ultra-wealthy family (Rp 10T+ net worth)
+2. Understand goals (preserve wealth, grow, legacy)
+3. Diversified portfolio (stocks, PE, real estate, art)
+4. Tax optimization (minimize tax burden)
+5. Estate planning (succession, trusts)
+6. Lifestyle services (jets, yachts, staff)
+7. Philanthropy (foundations, giving)
+8. Multi-generational wealth transfer
+
+Example:
+├─ Family wealth: Rp 50T
+├─ Allocation:
+│  ├─ Public stocks: Rp 10T (20%)
+│  ├─ Private equity: Rp 15T (30%)
+│  ├─ Real estate: Rp 10T (20%)
+│  ├─ Bonds: Rp 5T (10%)
+│  ├─ Alternative (art, collectibles): Rp 5T (10%)
+│  └─ Cash: Rp 5T (10%)
+├─ Annual return: 8% = Rp 4T
+├─ Family spending: Rp 1T/year
+├─ Taxes: Rp 500B (minimized through planning)
+├─ Philanthropy: Rp 500B
+└─ Net growth: Rp 2T (4% after spending)
+Key Features:
+typescript✅ Holistic Wealth Management
+├─ Investment management (multi-asset)
+├─ Tax planning (minimize legally)
+├─ Estate planning (wills, trusts)
+├─ Risk management (insurance)
+├─ Bill pay & accounting
+└─ Concierge services
+
+✅ Alternative Investments
+├─ Private equity (illiquid, high return)
+├─ Real estate (direct ownership)
+├─ Art & collectibles (passion investments)
+├─ Hedge funds (sophisticated strategies)
+├─ Commodities (gold, etc)
+└─ Cryptocurrencies (emerging asset)
+
+✅ Family Governance
+├─ Family constitution (rules)
+├─ Next-gen education (financial literacy)
+├─ Succession planning (who inherits?)
+├─ Family meetings (quarterly)
+├─ Conflict resolution
+└─ Legacy planning
+
+✅ Philanthropy
+├─ Foundation setup
+├─ Grant making
+├─ Impact investing (mission + returns)
+├─ Donor-advised funds
+└─ Charitable trusts
+
+✅ Lifestyle Management
+├─ Property management (multiple homes)
+├─ Staff management (drivers, chefs, etc)
+├─ Travel planning (jets, yachts)
+├─ Security (personal protection)
+└─ Healthcare (concierge medicine)
+
+## **6. Pension Fund - NEW 🆕**
+
+### **Core Mechanics:**
+```
+Manage retirement savings → Long-term investing → Pay pensions
+Regulated, conservative, actuarial-based
+Gameplay Loop:
+typescriptPension Fund Flow:
+1. Collect contributions (from employers/employees)
+2. Invest for long term (30-40 years)
+3. Actuarial calculations (liability projections)
+4. Asset-liability matching
+5. Pay pensions to retirees
+6. Regulatory compliance (funding ratio)
+7. Intergenerational fairness
+
+Example:
+├─ Active members: 10,000 (contributing)
+├─ Retirees: 2,000 (receiving pensions)
+├─ Monthly contributions: Rp 50B
+├─ Monthly pensions paid: Rp 20B
+├─ Net cash flow: +Rp 30B/month
+├─ Investment portfolio: Rp 50T
+├─ Required return: 7% (to meet obligations)
+├─ Actual return: 8% (surplus!)
+├─ Funding ratio: 120% (healthy)
+└─ Able to increase benefits or reduce contributions
+Key Features:
+typescript✅ Actuarial Management
+├─ Liability calculations (future pensions)
+├─ Mortality assumptions (life expectancy)
+├─ Salary growth projections
+├─ Inflation adjustments
+├─ Discount rate selection
+└─ Funding ratio (assets / liabilities)
+
+✅ Long-Term Investing
+├─ Strategic asset allocation (decades)
+├─ Illiquid investments (PE, infra)
+├─ Patient capital (no panic selling)
+├─ ESG investing (sustainable)
+├─ Currency hedging (international exposure)
+└─ Rebalancing (systematic)
+
+✅ Risk Management
+├─ Interest rate risk (liabilities move with rates)
+├─ Longevity risk (people live longer)
+├─ Inflation risk (erodes purchasing power)
+├─ Market risk (portfolio volatility)
+├─ Sequence of returns risk (timing matters)
+└─ Hedging strategies (derivatives)
+
+✅ Benefit Design
+├─ Defined benefit vs defined contribution
+├─ Normal retirement age
+├─ Early retirement options
+├─ Disability benefits
+├─ Survivor benefits
+└─ COLA (cost of living adjustments)
+
+✅ Regulatory Compliance
+├─ Minimum funding requirements
+├─ Maximum salary for contributions
+├─ Vesting schedules
+├─ Reporting to regulator (OJK)
+├─ Annual valuation
+└─ Governance standards

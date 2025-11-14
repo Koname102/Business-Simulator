@@ -1,0 +1,9 @@
+mkdir saves
+touch saves/.gitkeep
+```
+
+Add to `.gitignore`:
+```
+# Save files
+saves/*.json
+!saves/.gitkeep

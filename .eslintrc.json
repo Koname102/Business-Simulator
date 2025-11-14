@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["**/fintech/**"],
+            "message": "Do not import fintech modules in insurance/investment code"
+          },
+          {
+            "group": ["**/insurance/**"],
+            "message": "Do not import insurance modules in fintech/investment code"
+          },
+          {
+            "group": ["**/investment/**"],
+            "message": "Do not import investment modules in fintech/insurance code"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "version": "1.0.0",
+  "timestamp": 1763056705113,
+  "playtime": 5460,
+  "player": {
+    "id": "fe804819-da4e-4d13-bf51-1d2e65b8cf60",
+    "name": "Diyaz",
+    "age": 21,
+    "experience": 0,
+    "level": 1,
+    "createdAt": 1763056624681
+  },
+  "company": {
+    "id": "80ec3593-a6b0-4e33-9486-2b450ad42636",
+    "name": "PT Asuransi Jiwa",
+    "type": "insurance",
+    "foundedAt": 1763056624681,
+    "capital": 500000000,
+    "balance": 405463257,
+    "totalRevenue": 13406683,
+    "totalExpense": 107943426,
+    "monthlyProfit": -94536743,
+    "reputation": 40,
+    "customers": 0,
+    "gameTime": 5460,
+    "isPaused": true,
+    "difficulty": "medium"
+  },
+  "fintech": {
+    "loans": [],
+    "totalDisbursed": 0,
+    "totalRepaid": 0,
+    "defaultRate": 0,
+    "activeLoans": 0,
+    "currentLoans": []
+  },
+  "insurance": {
+    "policies": [],
+    "totalPremiumCollected": 13406683,
+    "totalClaimsPaid": 107943426,
+    "claimRatio": 0,
+    "activePolicies": 5,
+    "currentPolicies": [
+      {
+        "id": "b352d3a5-6200-4810-a4e8-f5d3d633c2f4",
+        "holderName": "Siti Wijaya",
+        "holderAge": 18,
+        "coverageAmount": 2581317511,
+        "premiumMonthly": 2323186,
+        "status": "active",
+        "startDate": 1763056624781,
+        "endDate": 2074096624781,
+        "beneficiaryName": "Sibling: Ahmad Kusuma",
+        "healthStatus": "excellent"
+      },
+      {
+        "id": "9e96b947-a441-45c3-b5c0-d61f18434125",
+        "holderName": "Joko Purnomo",
+        "holderAge": 51,
+        "coverageAmount": 575541799,
+        "premiumMonthly": 1683460,
+        "status": "active",
+        "startDate": 1763056624781,
+        "endDate": 2074096624781,
+        "beneficiaryName": "Partner: Sri Wijaya",
+        "healthStatus": "fair"
+      },
+      {
+        "id": "a0c05b46-aa69-4680-8806-7b25f1162492",
+        "holderName": "Agus Santoso",
+        "holderAge": 57,
+        "coverageAmount": 359811421,
+        "premiumMonthly": 728618,
+        "status": "claimed",
+        "startDate": 1763056624781,
+        "endDate": 2074096624781,
+        "beneficiaryName": "Partner: Budi Utomo",
+        "healthStatus": "excellent"
+      },
+      {
+        "id": "2e658690-2aed-4139-94cd-818cc91a5bfb",
+        "holderName": "Agus Kusuma",
+        "holderAge": 50,
+        "coverageAmount": 1545476510,
+        "premiumMonthly": 6954644,
+        "status": "active",
+        "startDate": 1763056646516,
+        "endDate": 2074096646516,
+        "beneficiaryName": "Sibling: Agus Utomo",
+        "healthStatus": "poor"
+      },
+      {
+        "id": "f3081db9-0b33-46ff-bfbe-d84954bff940",
+        "holderName": "Agus Utomo",
+        "holderAge": 52,
+        "coverageAmount": 847790242,
+        "premiumMonthly": 1716775,
+        "status": "active",
+        "startDate": 1763056668281,
+        "endDate": 2074096668281,
+        "beneficiaryName": "Partner: Dewi Santoso",
+        "healthStatus": "excellent"
+      },
+      {
+        "id": "d58e9999-7093-4d7c-9fa3-5dce93986270",
+        "holderName": "Siti Kusuma",
+        "holderAge": 51,
+        "coverageAmount": 493764380,
+        "premiumMonthly": 2221940,
+        "status": "active",
+        "startDate": 1763056688289,
+        "endDate": 2074096688289,
+        "beneficiaryName": "Partner: Sri Purnomo",
+        "healthStatus": "poor"
+      }
+    ]
+  },
+  "investment": {
+    "portfolio": [],
+    "aum": 0,
+    "totalReturn": 0,
+    "activeInvestments": 0,
+    "currentDeals": [
+      {
+        "id": "90fed2b9-77a5-4a50-9305-97dc3d167349",
+        "targetName": "FutureTech Connect",
+        "sector": "Food & Beverage",
+        "valuation": 48229084012,
+        "equityOffered": 21,
+        "investmentNeeded": 10128107643,
+        "pitchSummary": "Next-generation platform leveraging latest technology for unprecedented growth."
+      },
+      {
+        "id": "0304a14d-f438-4990-8843-db7e98f436c8",
+        "targetName": "InnovateLab Plus",
+        "sector": "SaaS",
+        "valuation": 41724157896,
+        "equityOffered": 11,
+        "investmentNeeded": 4589657369,
+        "pitchSummary": "Next-generation platform leveraging latest technology for unprecedented growth."
+      },
+      {
+        "id": "028203c4-3174-4c62-a65d-731fdaa83f39",
+        "targetName": "CoreLogic Connect",
+        "sector": "Gaming",
+        "valuation": 84715761820,
+        "equityOffered": 25,
+        "investmentNeeded": 21178940455,
+        "pitchSummary": "Fast-growing marketplace connecting buyers and sellers with innovative features."
+      }
+    ]
+  },
+  "transactions": [
+    {
+      "type": "expense",
+      "amount": 107943426,
+      "category": "life-insurance-claim",
+      "description": "disability claim paid to Agus Santoso",
+      "id": "da8b3ade-9dd6-4794-8948-b5e0f216b028",
+      "timestamp": 1763056674821
+    },
+    {
+      "type": "income",
+      "amount": 1716775,
+      "category": "premium-collection",
+      "description": "Life insurance premium from Agus Utomo",
+      "id": "bc1693f3-2277-4875-9c28-2657fa88eccd",
+      "timestamp": 1763056673284
+    },
+    {
+      "type": "income",
+      "amount": 6954644,
+      "category": "premium-collection",
+      "description": "Life insurance premium from Agus Kusuma",
+      "id": "ffe9c457-cbce-4766-a283-efdcf3a09cd2",
+      "timestamp": 1763056673284
+    },
+    {
+      "type": "income",
+      "amount": 728618,
+      "category": "premium-collection",
+      "description": "Life insurance premium from Agus Santoso",
+      "id": "2a8beaac-91d1-4c1c-a439-0e014b7bf348",
+      "timestamp": 1763056673283
+    },
+    {
+      "type": "income",
+      "amount": 1683460,
+      "category": "premium-collection",
+      "description": "Life insurance premium from Joko Purnomo",
+      "id": "0d2b27b8-0763-4f29-800c-48cb20963183",
+      "timestamp": 1763056673283
+    },
+    {
+      "type": "income",
+      "amount": 2323186,
+      "category": "premium-collection",
+      "description": "Life insurance premium from Siti Wijaya",
+      "id": "7d864de1-a0d5-483b-aa54-0e33d19bdef8",
+      "timestamp": 1763056673283
+    }
+  ],
+  "notifications": [
+    {
+      "type": "success",
+      "title": "New Life Insurance Policy Sold",
+      "message": "Siti Kusuma (51 years) purchased life insurance",
+      "id": "abec3010-23db-4543-8cee-8ffe0e3e7e3b",
+      "timestamp": 1763056688289,
+      "read": false
+    },
+    {
+      "type": "success",
+      "title": "Life Insurance Claim Approved",
+      "message": "Paid Rp 107.943.426 to Agus Santoso's beneficiary",
+      "id": "9989acb9-ba94-4347-93a3-f6a36615e41a",
+      "timestamp": 1763056674821,
+      "read": false
+    },
+    {
+      "type": "success",
+      "title": "New Life Insurance Policy Sold",
+      "message": "Agus Utomo (52 years) purchased life insurance",
+      "id": "4a59f5fb-0a14-42c9-ba0e-487ee76e38e6",
+      "timestamp": 1763056668282,
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Life Insurance Claim Submitted",
+      "message": "Agus Kusuma submitted death claim for Rp 1.545.476.510",
+      "id": "df1671c4-e4dc-4249-bcbb-001863d1f00d",
+      "timestamp": 1763056653277,
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Life Insurance Claim Submitted",
+      "message": "Joko Purnomo submitted death claim for Rp 575.541.799",
+      "id": "1859d84e-30f2-4e76-948d-d2c36e8964c9",
+      "timestamp": 1763056653277,
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Life Insurance Claim Submitted",
+      "message": "Agus Santoso submitted disability claim for Rp 107.943.426",
+      "id": "76d28e3b-dfeb-454f-b7e3-b896a1e1f39a",
+      "timestamp": 1763056647518,
+      "read": false
+    },
+    {
+      "type": "success",
+      "title": "New Life Insurance Policy Sold",
+      "message": "Agus Kusuma (50 years) purchased life insurance",
+      "id": "f9f50bff-1cd6-4add-ba12-7a4f7943ff0b",
+      "timestamp": 1763056646516,
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Life Insurance Claim Rejected",
+      "message": "Rejected critical illness claim from Joko Purnomo. Reputation -10",
+      "id": "5b9fa2d1-4387-43a5-bc6e-61ef255c3819",
+      "timestamp": 1763056640470,
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Life Insurance Claim Submitted",
+      "message": "Joko Purnomo submitted critical illness claim for Rp 575.541.799",
+      "id": "c2b23051-c521-4fac-94f2-27958e943d55",
+      "timestamp": 1763056634790,
+      "read": false
+    }
+  ],
+  "gameTime": {
+    "elapsed": 5460,
+    "isPaused": true,
+    "speed": 1
+  },
+  "metadata": {
+    "slotNumber": 3,
+    "saveName": "Insurance",
+    "businessType": "insurance",
+    "businessSubType": "life-insurance",
+    "difficulty": "medium",
+    "progress": {
+      "balance": 405463257,
+      "balanceGrowth": 305.463257,
+      "level": 1,
+      "achievements": []
+    }
+  }
+}

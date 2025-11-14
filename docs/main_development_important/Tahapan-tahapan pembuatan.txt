@@ -1,0 +1,31 @@
+TAHAP AWAL (Week 1-4): CORE FOUNDATION
+├── 1. Character & Company Creation 
+├── 2. Game Environment (3 tipe bisnis) 
+├── 3. Time/Progression System 
+├── 4. Basic Economy & Balance 
+├── 5. Save/Load System 
+├── 6. Tutorial/Onboarding 
+└── 7. Feedback/Notification System 
+
+TAHAP LANJUTAN:
+Sprint 1 (Week 1-2): Foundation
+1. Project Setup + Folder Structure
+2. Character Creation Flow
+3. Company Creation Flow  
+4. Basic UI Layout (Dashboard)
+Sprint 2 (Week 2-3): Core Loop
+5. Time System (tick-based recommended)
+6. Fintech Lending Mechanic (pilih 1 tipe dulu)
+7. Save/Load to localStorage
+8. Basic Economy Balance
+Sprint 3 (Week 3-4): Playability
+9. Notification/Feedback System
+10. Tutorial (3-5 steps)
+11. Win/Lose Condition
+12. Polish & Bug Fixing
+Sprint 4+ (Week 5+): Expansion
+13. Add Insurance mechanic
+14. Add Investment mechanic
+15. Employee system
+16. Rival companies
+17. Sub-types
