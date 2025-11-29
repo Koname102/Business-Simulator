@@ -1,5 +1,5 @@
 // ============================================
-// FILE: components/game/investment/InvestmentStats.tsx
+// FILE: components/game/investment/VentureStats.tsx
 // PURPOSE: Investment-specific stats display
 // RELATIONS: Uses gameStore investment state
 // ============================================
@@ -7,9 +7,9 @@
 'use client';
 
 import { useGameStore } from '@/store/gameStore';
-import { calculatePortfolioIRR } from '@/lib/game-logic/investment';
+import { calculatePortfolioIRR } from '@/lib/game-logic/venture';
 
-export default function InvestmentStats() {
+export default function VentureStats() {
   const company = useGameStore((state) => state.company);
   const investment = useGameStore((state) => state.investment);
   

@@ -7,7 +7,7 @@
 'use client';
 
 import type { Investment } from '@/lib/types';
-import { getSectorIcon, getReturnMultipleLabel } from '@/lib/game-logic/investment';
+import { getSectorIcon, getReturnMultipleLabel } from '@/lib/game-logic/venture';
 
 interface PortfolioCardProps {
   investment: Investment;

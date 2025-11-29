@@ -21,9 +21,9 @@ export const TIME_CONFIG = {
   },
   investment: {
     tickInterval: 1000,
-    realSecondsPerGameMinute: 0.5,
-    realSecondsPerGameHour: 30,
-    realSecondsPerGameDay: 720,
+    realSecondsPerGameMinute: 1,
+    realSecondsPerGameHour: 60,
+    realSecondsPerGameDay: 1440,
     startHour: 7,  // ADD
   },
 } as const;

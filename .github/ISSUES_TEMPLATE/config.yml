@@ -1,0 +1,21 @@
+blank_issues_enabled: true
+
+contact_links:
+
+  - name: 💬 Discussions
+
+    url: https://github.com/Koname102/Business-Simulator/discussions
+
+    about: Ask questions and discuss ideas with the community
+
+  - name: 📖 Documentation
+
+    url: https://github.com/Koname102/Business-Simulator/blob/main/README.md
+
+    about: Read the project documentation
+
+  - name: 🗺️ Roadmap
+
+    url: https://github.com/Koname102/Business-Simulator/blob/main/ROADMAP.md
+
+    about: View the development roadmap

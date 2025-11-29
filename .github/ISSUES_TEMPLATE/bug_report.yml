@@ -1,0 +1,259 @@
+name: Bug Report
+
+description: Report a bug or issue with the game
+
+title: "[BUG] "
+
+labels: ["bug", "priority: medium"]
+
+body:
+
+  - type: markdown
+
+    attributes:
+
+      value: |
+
+        Thanks for taking the time to report a bug! Please fill out the information below.
+
+ 
+
+  - type: dropdown
+
+    id: business-mode
+
+    attributes:
+
+      label: Business Mode
+
+      description: Which business mode does this bug affect?
+
+      options:
+
+        - Fintech (P2P Lending)
+
+        - Life Insurance
+
+        - Health Insurance
+
+        - Investment/VC
+
+        - All modes
+
+        - Other/Not applicable
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: dropdown
+
+    id: severity
+
+    attributes:
+
+      label: Severity
+
+      description: How severe is this bug?
+
+      options:
+
+        - Critical - Game breaking, data loss
+
+        - High - Major functionality broken
+
+        - Medium - Feature not working as expected
+
+        - Low - Minor visual/UX issue
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: description
+
+    attributes:
+
+      label: Bug Description
+
+      description: A clear and concise description of what the bug is.
+
+      placeholder: Describe the bug...
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: steps
+
+    attributes:
+
+      label: Steps to Reproduce
+
+      description: Steps to reproduce the behavior
+
+      placeholder: |
+
+        1. Go to '...'
+
+        2. Click on '...'
+
+        3. Scroll down to '...'
+
+        4. See error
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: expected
+
+    attributes:
+
+      label: Expected Behavior
+
+      description: What did you expect to happen?
+
+      placeholder: I expected...
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: actual
+
+    attributes:
+
+      label: Actual Behavior
+
+      description: What actually happened?
+
+      placeholder: Instead, what happened was...
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: screenshots
+
+    attributes:
+
+      label: Screenshots
+
+      description: If applicable, add screenshots to help explain your problem
+
+      placeholder: Paste screenshots here...
+
+ 
+
+  - type: input
+
+    id: version
+
+    attributes:
+
+      label: Game Version
+
+      description: What version of the game are you using?
+
+      placeholder: "e.g., v0.0.1"
+
+ 
+
+  - type: dropdown
+
+    id: browser
+
+    attributes:
+
+      label: Browser
+
+      description: Which browser are you using?
+
+      options:
+
+        - Chrome
+
+        - Firefox
+
+        - Safari
+
+        - Edge
+
+        - Other
+
+ 
+
+  - type: dropdown
+
+    id: device
+
+    attributes:
+
+      label: Device Type
+
+      description: What device are you using?
+
+      options:
+
+        - Desktop
+
+        - Tablet
+
+        - Mobile
+
+        - Other
+
+ 
+
+  - type: textarea
+
+    id: additional
+
+    attributes:
+
+      label: Additional Context
+
+      description: Add any other context about the problem here
+
+      placeholder: Any additional information...
+
+ 
+
+  - type: textarea
+
+    id: logs
+
+    attributes:
+
+      label: Console Logs/Errors
+
+      description: If you have any console errors, paste them here
+
+      placeholder: |
+
+        Open browser DevTools (F12) and paste any errors from the Console tab
+
+      render: shell

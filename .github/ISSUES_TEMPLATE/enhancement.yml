@@ -1,0 +1,223 @@
+name: Enhancement
+
+description: Suggest an improvement to an existing feature
+
+title: "[ENHANCEMENT] "
+
+labels: ["enhancement", "priority: medium"]
+
+body:
+
+  - type: markdown
+
+    attributes:
+
+      value: |
+
+        Thanks for suggesting an improvement! This template is for enhancing **existing** features.
+
+        For **new** features, please use the Feature Request template instead.
+
+ 
+
+  - type: dropdown
+
+    id: area
+
+    attributes:
+
+      label: Area of Improvement
+
+      description: What area does this enhancement affect?
+
+      options:
+
+        - Game Balance
+
+        - UI/UX
+
+        - Performance
+
+        - Save/Load System
+
+        - Notifications
+
+        - Dashboard
+
+        - Game Mechanics
+
+        - Difficulty Scaling
+
+        - Other
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: dropdown
+
+    id: business-mode
+
+    attributes:
+
+      label: Business Mode
+
+      description: Which business mode does this affect?
+
+      options:
+
+        - Fintech (P2P Lending)
+
+        - Life Insurance
+
+        - Health Insurance
+
+        - Investment/VC
+
+        - All modes
+
+        - Not mode-specific
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: current-behavior
+
+    attributes:
+
+      label: Current Behavior
+
+      description: How does the feature currently work?
+
+      placeholder: |
+
+        Currently, when I...
+
+        The system does...
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: improvement
+
+    attributes:
+
+      label: Suggested Improvement
+
+      description: How should it work instead? What would make it better?
+
+      placeholder: |
+
+        Instead, it should...
+
+        This would be better because...
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: benefits
+
+    attributes:
+
+      label: Benefits
+
+      description: What are the benefits of this improvement?
+
+      placeholder: |
+
+        This would improve...
+
+        Players would benefit from...
+
+        It would make the game more...
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: implementation
+
+    attributes:
+
+      label: Implementation Suggestions
+
+      description: Do you have ideas on how to implement this? (Technical details welcome)
+
+      placeholder: |
+
+        This could be implemented by...
+
+        The code changes would be in...
+
+ 
+
+  - type: dropdown
+
+    id: impact
+
+    attributes:
+
+      label: Impact
+
+      description: How much would this improvement affect the game?
+
+      options:
+
+        - High - Major improvement to gameplay/UX
+
+        - Medium - Noticeable improvement
+
+        - Low - Minor polish/quality of life
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: examples
+
+    attributes:
+
+      label: Examples/Mockups
+
+      description: Add screenshots, mockups, or examples if applicable
+
+      placeholder: Paste images or describe examples...
+
+ 
+
+  - type: textarea
+
+    id: additional
+
+    attributes:
+
+      label: Additional Context
+
+      description: Any other information about the enhancement
+
+      placeholder: Any additional details...

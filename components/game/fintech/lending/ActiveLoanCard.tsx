@@ -7,7 +7,7 @@
 'use client';
 
 import type { Loan } from '@/lib/types';
-import { calculateMonthlyPayment, calculateTotalRepayment } from '@/lib/game-logic/fintech';
+import { calculateMonthlyPayment, calculateTotalRepayment } from '@/lib/game-logic/lending';
 
 interface ActiveLoanCardProps {
   loan: Loan;

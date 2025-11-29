@@ -1,5 +1,6 @@
 // ============================================
-// FILE: app/game/shared/Header.tsx
+// FILE: components/game/shared/Header.tsx
+// PURPOSE: Game header with controls + LOGGER
 // ============================================
 
 'use client';
@@ -9,6 +10,7 @@ import { useGameStore } from '@/store/gameStore';
 import NotificationPanel from './NotificationPanel';
 import SaveLoadMenu from '@/components/game/saves/SaveLoadMenu';
 import { SaveManager } from '@/lib/save-manager';
+import { logger } from '@/lib/logger'; // ✅ ADD LOGGER
 
 export default function Header() {
   const company = useGameStore((state) => state.company);
@@ -16,6 +18,7 @@ export default function Header() {
   const setGameSpeed = useGameStore((state) => state.setGameSpeed);
   const pauseGame = useGameStore((state) => state.pauseGame);
   const resumeGame = useGameStore((state) => state.resumeGame);
+  const addNotification = useGameStore((state) => state.addNotification);
   
   const [showSaveMenu, setShowSaveMenu] = useState(false);
   const [showLoadMenu, setShowLoadMenu] = useState(false);
@@ -43,24 +46,46 @@ export default function Header() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [company.isPaused]);
   
+  // ✅ Quick save with logger
   const handleQuickSave = async () => {
-    const success = SaveManager.autoSave();
-    if (await success) {
-      // Show brief success notification
-      setShowQuickSaveNotif(true);
-      setTimeout(() => setShowQuickSaveNotif(false), 2000);
+    try {
+      logger.info('Header', 'Quick save initiated');
+      
+      const success = SaveManager.autoSave();
+      
+      if (await success) {
+        logger.info('Header', 'Quick save successful');
+        
+        // Show brief success notification
+        setShowQuickSaveNotif(true);
+        setTimeout(() => setShowQuickSaveNotif(false), 2000);
+      } else {
+        throw new Error('Quick save failed');
+      }
+      
+    } catch (error) {
+      logger.error('Header', 'Quick save failed', error);
+      
+      addNotification({
+        type: 'error',
+        title: 'Quick Save Failed',
+        message: 'Unable to quick save. Please try manual save.',
+      });
     }
   };
   
   const handleTogglePause = () => {
     if (company.isPaused) {
       resumeGame();
+      logger.debug('Header', 'Game resumed via header toggle');
     } else {
       pauseGame();
+      logger.debug('Header', 'Game paused via header toggle');
     }
   };
   
   const handleSpeedChange = (speed: number) => {
+    logger.debug('Header', 'Speed changed via header', { speed });
     setGameSpeed(speed);
   };
   
@@ -143,7 +168,10 @@ export default function Header() {
               </button>
               
               <button
-                onClick={() => setShowSaveMenu(true)}
+                onClick={() => {
+                  logger.debug('Header', 'Save menu opened');
+                  setShowSaveMenu(true);
+                }}
                 className="px-3 py-1.5 bg-green-600 text-white rounded hover:bg-green-700 text-sm font-semibold transition-colors"
                 title="Save to Slot"
               >
@@ -151,7 +179,10 @@ export default function Header() {
               </button>
               
               <button
-                onClick={() => setShowLoadMenu(true)}
+                onClick={() => {
+                  logger.debug('Header', 'Load menu opened');
+                  setShowLoadMenu(true);
+                }}
                 className="px-3 py-1.5 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm font-semibold transition-colors"
                 title="Load Game"
               >
@@ -217,15 +248,24 @@ export default function Header() {
       {showSaveMenu && (
         <SaveLoadMenu
           mode="save"
-          onClose={() => setShowSaveMenu(false)}
-          onSuccess={() => setShowSaveMenu(false)}
+          onClose={() => {
+            logger.debug('Header', 'Save menu closed');
+            setShowSaveMenu(false);
+          }}
+          onSuccess={() => {
+            logger.debug('Header', 'Save menu closed after success');
+            setShowSaveMenu(false);
+          }}
         />
       )}
       
       {showLoadMenu && (
         <SaveLoadMenu
           mode="load"
-          onClose={() => setShowLoadMenu(false)}
+          onClose={() => {
+            logger.debug('Header', 'Load menu closed');
+            setShowLoadMenu(false);
+          }}
         />
       )}
     </>

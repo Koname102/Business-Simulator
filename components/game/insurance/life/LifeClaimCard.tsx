@@ -1,22 +1,15 @@
 // ============================================
 // FILE: components/game/insurance/life/LifeClaimCard.tsx
 // PURPOSE: Life Insurance Claim Card (approve/reject)
+// UPDATED: Fixed to use ClaimApplication from types.ts
 // ============================================
 
 'use client';
 
+import type { ClaimApplication } from '@/lib/types';
+
 interface LifeClaimCardProps {
-  claim: {
-    id: string;
-    policyId: string;
-    holderName: string;
-    holderAge: number;
-    coverageAmount: number;
-    claimAmount: number;
-    claimType: 'death' | 'critical_illness' | 'disability';
-    claimReason: string;
-    submittedAt: number;
-  };
+  claim: ClaimApplication;  // ✅ FIXED: Use ClaimApplication from types.ts
   onApprove: (claimId: string) => void;
   onReject: (claimId: string) => void;
   isProcessing?: boolean;
@@ -83,7 +76,7 @@ export default function LifeClaimCard({
           <span className="text-3xl">🏥</span>
           <div>
             <h3 className="text-lg font-bold text-gray-900">
-              {claim.holderName}
+              {claim.policyHolderName}
             </h3>
             <p className="text-sm text-gray-600">
               Age: {claim.holderAge} • Life Insurance Claim
@@ -108,9 +101,11 @@ export default function LifeClaimCard({
         <p className="text-sm font-medium mb-1">
           {claimTypeInfo.description}
         </p>
-        <p className="text-sm">
-          <span className="font-semibold">Reason:</span> {claim.claimReason}
-        </p>
+        {claim.claimReason && (
+          <p className="text-sm">
+            <span className="font-semibold">Reason:</span> {claim.claimReason}
+          </p>
+        )}
         <p className="text-sm mt-2">
           <span className="font-semibold">Claim Percentage:</span> {getClaimPercentage()}% of coverage
         </p>

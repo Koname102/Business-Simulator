@@ -1,41 +1,37 @@
 // ============================================
-// FILE: app/game/insurance/life/page.tsx (FIXED - NO BUGS)
+// FILE: app/game/insurance/life/page.tsx
+// PURPOSE: Life Insurance game dashboard with FULL ERROR HANDLING
 // ============================================
 
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGameStore } from '@/store/gameStore';
 import { 
   generateNewPolicy, 
-  shouldGenerateClaim, 
-  generateClaimAmount,
-  shouldPolicyExpire,
+  shouldGenerateClaim,
+  shouldPolicyExpire 
 } from '@/lib/game-logic/life-insurance';
-import type { LifeInsurancePolicy } from '@/lib/types';
+import type { LifeInsurancePolicy, ClaimApplication } from '@/lib/types';
 import { calculateRealInterval, convertRealToGameTime } from '@/lib/time-system';
 import { getDifficultyAdjustedInterval } from '@/lib/difficulty-config';
-
+import { 
+  guardArrayAccess, 
+  guardBalanceFloor, 
+  validateClaimAmount,
+  getFirstErrorMessage 
+} from '@/lib/validation';
 import AutoSaveManager from '@/components/game/saves/AutoSaveManager';
+import Toast from '@/components/ui/Toast';
+import { logger } from '@/lib/logger'; // ✅ ADD LOGGER
+
 import Header from '@/components/game/shared/Header';
-import InsuranceStats from '@/components/game/insurance/InsuranceStats';
-import LifePolicyCard from '@/components/game/insurance/life/LifePolicyCard';
-import LifeClaimCard from '@/components/game/insurance/life/LifeClaimCard';
 import TimeDisplay from '@/components/game/shared/TimeDisplay';
 import ClaimHistoryPanel from '@/components/game/insurance/life/ClaimHistoryPanel';
-
-interface ClaimApplication {
-  id: string;
-  policyId: string;
-  holderName: string;
-  holderAge: number;
-  coverageAmount: number;
-  claimAmount: number;
-  claimType: 'death' | 'critical_illness' | 'disability';
-  claimReason: string;
-  submittedAt: number;
-}
+import LifeClaimCard from '@/components/game/insurance/life/LifeClaimCard';
+import LifePolicyCard from '@/components/game/insurance/life/LifePolicyCard';
+import LifeStats from '@/components/game/insurance/life/LifeStats';
 
 export default function LifeInsurancePage() {
   const router = useRouter();
@@ -50,13 +46,7 @@ export default function LifeInsurancePage() {
   const [pendingClaims, setPendingClaims] = useState<ClaimApplication[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
-  
-  // ✅ NEW: Prevent double-clicking
-  const [processingClaims, setProcessingClaims] = useState<Set<string>>(new Set());
-  
-  const lastSyncedPoliciesCount = useRef(0);
 
-  // Check initialization
   useEffect(() => {
     const isLoadingSave = sessionStorage.getItem('loading-save');
     
@@ -70,6 +60,7 @@ export default function LifeInsurancePage() {
       setIsLoading(false);
       
       if (!player || !company || !insurance) {
+        logger.warn('LifeInsurance', 'Game not initialized, redirecting to onboarding');
         router.push('/onboarding/character');
       }
     }, 200);
@@ -77,222 +68,389 @@ export default function LifeInsurancePage() {
     return () => clearTimeout(timer);
   }, [player, company, insurance, router]);
 
-  // Load policies from store OR generate initial policies
   useEffect(() => {
-    if (!insurance || isInitialized || !company) return;
+    if (!insurance || isInitialized) return;
     
     if (insurance.currentPolicies && insurance.currentPolicies.length > 0) {
-      setActivePolicies(insurance.currentPolicies as LifeInsurancePolicy[]);
-      lastSyncedPoliciesCount.current = insurance.currentPolicies.length;
-      console.log(`✅ Loaded ${insurance.currentPolicies.length} policies from store`);
-    } else {
-      // Generate 3 initial policies
-      const initialPolicies: LifeInsurancePolicy[] = [];
-      for (let i = 0; i < 3; i++) {
-        const newPolicy = generateNewPolicy(company.difficulty);
-        initialPolicies.push(newPolicy);
-      }
-      setActivePolicies(initialPolicies);
-      lastSyncedPoliciesCount.current = initialPolicies.length;
-      console.log(`✅ Generated ${initialPolicies.length} initial policies`);
+      setActivePolicies(insurance.currentPolicies.filter(p => p.status === 'active'));
+      logger.info('LifeInsurance', `Loaded ${insurance.currentPolicies.length} policies from store`);
+    }
+    
+    if (insurance.pendingClaims && insurance.pendingClaims.length > 0) {
+      setPendingClaims(insurance.pendingClaims);
+      logger.info('LifeInsurance', `Loaded ${insurance.pendingClaims.length} pending claims from store`);
     }
     
     setIsInitialized(true);
-  }, [insurance, isInitialized, company]);
+  }, [insurance, isInitialized]);
 
-  // Sync to store
-  const syncPoliciesToStore = useCallback((policies: LifeInsurancePolicy[]) => {
-    if (policies.length === lastSyncedPoliciesCount.current) return;
+  useEffect(() => {
+    if (!isInitialized) return;
     
     const currentInsurance = useGameStore.getState().insurance;
-    if (currentInsurance) {
-      useGameStore.setState({
-        insurance: {
-          ...currentInsurance,
-          currentPolicies: policies,
-          activePolicies: policies.filter(p => p.status === 'active' || p.status === 'premium_waiver').length,
-        },
-      });
-      lastSyncedPoliciesCount.current = policies.length;
-    }
-  }, []);
-
-  // ✅ NEW: Helper to check if policy sales should succeed
-  const shouldGeneratePolicySale = useCallback(() => {
-    if (!company) return false;
+    if (!currentInsurance) return;
     
-    const reputation = company.reputation;
-    
-    // Reputation-based success rate
-    let successRate = 0.5; // 50% base
-    
-    if (reputation >= 70) successRate = 0.8;      // High rep: 80%
-    else if (reputation >= 50) successRate = 0.6; // Good rep: 60%
-    else if (reputation >= 30) successRate = 0.4; // Low rep: 40%
-    else successRate = 0.2;                        // Very low: 20%
-    
-    return Math.random() < successRate;
-  }, [company]);
-
-  // ✅ UPDATED: Policy sales handler with reputation check
-  const handlePolicySales = useCallback(() => {
-    if (company?.isPaused) return;
-    
-    // ✅ Check if sales should happen based on reputation
-    if (!shouldGeneratePolicySale()) {
-      console.log(`⏳ No policy sale (reputation: ${company?.reputation})`);
-      return; // No sale this time!
-    }
-    
-    const newPolicy = generateNewPolicy(company?.difficulty);
-    setActivePolicies((prev) => {
-      const updated = [...prev, newPolicy];
-      syncPoliciesToStore(updated);
-      return updated;
+    useGameStore.setState({
+      insurance: {
+        ...currentInsurance,
+        currentPolicies: activePolicies,
+        pendingClaims: pendingClaims,
+      },
     });
-    
-    useGameStore.getState().addNotification({
-      type: 'success',
-      title: 'New Life Insurance Policy Sold',
-      message: `${newPolicy.holderName} (${newPolicy.holderAge} years) purchased life insurance`,
-    });
-  }, [company?.isPaused, company?.difficulty, company?.reputation, syncPoliciesToStore, shouldGeneratePolicySale]);
+  }, [activePolicies, pendingClaims, isInitialized]);
 
-  // Premium collection handler
-  const handlePremiumCollection = useCallback(() => {
-    if (company?.isPaused) return;
-    
-    let totalPremium = 0;
-    let premiumCount = 0;
-    const transactionsToAdd: Array<{
-      type: 'income';
-      amount: number;
-      category: string;
-      description: string;
-    }> = [];
-    
-    setActivePolicies((prevPolicies) => {
-      const updatedPolicies = prevPolicies.map((policy) => {
-        // Skip claimed, expired, or terminated policies
-        if (policy.status === 'claimed' || policy.status === 'expired' || policy.status === 'terminated') {
-          return policy;
-        }
-        
-        // Skip premium waiver (disability - no premium needed)
-        if (policy.status === 'premium_waiver') {
-          return policy;
-        }
-        
-        // Check expiry
-        if (shouldPolicyExpire(policy)) {
-          useGameStore.getState().addNotification({
-            type: 'info',
-            title: 'Life Insurance Policy Expired',
-            message: `${policy.holderName}'s policy has expired`,
-          });
-          return { ...policy, status: 'expired' as const };
-        }
-        
-        // Collect premium (only from ACTIVE)
-        if (policy.status === 'active') {
-          totalPremium += policy.premiumMonthly;
-          premiumCount++;
-          
-          transactionsToAdd.push({
-            type: 'income',
-            amount: policy.premiumMonthly,
-            category: 'premium-collection',
-            description: `Life insurance premium from ${policy.holderName}`,
-          });
-        }
-        
-        return policy;
+  // ✅ FULL TRY-CATCH: handlePolicyGeneration
+  const handlePolicyGeneration = useCallback(() => {
+    try {
+      if (company?.isPaused) return;
+      
+      const op = logger.operation('Insurance', 'GeneratePolicy');
+      
+      const newPolicy = generateNewPolicy(company?.difficulty);
+      setActivePolicies((prev) => [...prev, newPolicy]);
+      
+      op.success('Policy generated', {
+        policyId: newPolicy.id,
+        holderName: newPolicy.holderName,
+        coverageAmount: newPolicy.coverageAmount,
       });
       
-      syncPoliciesToStore(updatedPolicies);
-      return updatedPolicies;
-    });
-    
-    if (totalPremium > 0) {
-      useGameStore.getState().updateBalance(totalPremium);
+      useGameStore.getState().addNotification({
+        type: 'info',
+        title: 'New Policy Application',
+        message: `${newPolicy.holderName} applied for coverage`,
+      });
+      
+    } catch (error) {
+      logger.error('Insurance', 'Policy generation failed', error);
+      // ✅ Graceful fallback: skip this generation, will retry next cycle
+    }
+  }, [company?.isPaused, company?.difficulty]);
+
+  // ✅ FULL TRY-CATCH: handleClaimGeneration
+  const handleClaimGeneration = useCallback(() => {
+    try {
+      if (company?.isPaused) return;
+      
+      // ✅ KEEP existing validation
+      const arrayGuard = guardArrayAccess(activePolicies, 0, 'Active Policies');
+      if (!arrayGuard.isValid) {
+        return; // No active policies, skip silently
+      }
+      
+      const op = logger.operation('Insurance', 'GenerateClaims');
+      let claimsGenerated = 0;
+      
+      activePolicies.forEach((policy) => {
+        if (policy.status !== 'active') return;
+        
+        if (shouldGenerateClaim(policy, company?.difficulty)) {
+          const claimTypeRoll = Math.random();
+          let claimType: 'death' | 'critical_illness' | 'disability';
+          let claimAmount: number;
+          
+          if (claimTypeRoll < 0.6) {
+            claimType = 'death';
+            claimAmount = policy.coverageAmount;
+          } else if (claimTypeRoll < 0.85) {
+            claimType = 'critical_illness';
+            claimAmount = Math.round(policy.coverageAmount * (0.3 + Math.random() * 0.2));
+          } else {
+            claimType = 'disability';
+            claimAmount = Math.round(policy.coverageAmount * (0.3 + Math.random() * 0.2));
+          }
+          
+          const newClaim: ClaimApplication = {
+            id: crypto.randomUUID(),
+            policyId: policy.id,
+            policyHolderName: policy.holderName,
+            holderAge: policy.holderAge,
+            claimType,
+            claimAmount,
+            coverageAmount: policy.coverageAmount,
+            submittedAt: Date.now(),
+          };
+          
+          setPendingClaims((prev) => [...prev, newClaim]);
+          claimsGenerated++;
+          
+          useGameStore.getState().addNotification({
+            type: 'warning',
+            title: 'New Claim Submitted',
+            message: `${policy.holderName} submitted ${claimType} claim`,
+          });
+        }
+      });
+      
+      if (claimsGenerated > 0) {
+        op.success(`Generated ${claimsGenerated} claims`, { count: claimsGenerated });
+      }
+      
+    } catch (error) {
+      logger.error('Insurance', 'Claim generation failed', error);
+      // ✅ Graceful fallback: skip this generation cycle
+    }
+  }, [company?.isPaused, company?.difficulty, activePolicies]);
+
+  // ✅ FULL TRY-CATCH: handlePremiumCollection
+  const handlePremiumCollection = useCallback(() => {
+    try {
+      if (company?.isPaused) return;
+      
+      // ✅ KEEP existing validation
+      const arrayGuard = guardArrayAccess(activePolicies, 0, 'Active Policies');
+      if (!arrayGuard.isValid) {
+        return; // No active policies, skip silently
+      }
+      
+      const op = logger.operation('Insurance', 'CollectPremiums');
+      
+      let totalPremium = 0;
+      
+      activePolicies.forEach((policy) => {
+        if (policy.status === 'active') {
+          totalPremium += policy.premiumMonthly;
+        }
+      });
+      
+      if (totalPremium > 0) {
+        useGameStore.getState().updateBalance(totalPremium);
+        useGameStore.getState().addTransaction({
+          type: 'income',
+          amount: totalPremium,
+          category: 'insurance-premium',
+          description: `Monthly premium collection from ${activePolicies.filter(p => p.status === 'active').length} policies`,
+        });
+        
+        const currentInsurance = useGameStore.getState().insurance;
+        if (currentInsurance) {
+          useGameStore.setState({
+            insurance: {
+              ...currentInsurance,
+              totalPremiumCollected: currentInsurance.totalPremiumCollected + totalPremium,
+            },
+          });
+        }
+        
+        op.success('Premiums collected', {
+          totalAmount: totalPremium,
+          policyCount: activePolicies.filter(p => p.status === 'active').length,
+        });
+      }
+      
+    } catch (error) {
+      logger.error('Insurance', 'Premium collection failed', error);
+      // ✅ Graceful fallback: skip this collection cycle
+    }
+  }, [company?.isPaused, activePolicies]);
+
+  // ✅ FULL TRY-CATCH: handleApproveClaim
+  const handleApproveClaim = async (claimId: string) => {
+    try {
+      // 1. Validate input
+      if (!claimId) {
+        throw new Error('[VAL-001] Claim ID is required');
+      }
+
+      // 2. Validate array not empty (KEEP existing validation!)
+      const arrayGuard = guardArrayAccess(pendingClaims, 0, 'Pending Claims');
+      if (!arrayGuard.isValid) {
+        throw new Error('[STATE-005] ' + getFirstErrorMessage(arrayGuard));
+      }
+      
+      // 3. Find claim
+      const claim = pendingClaims.find(c => c.id === claimId);
+      if (!claim) {
+        throw new Error('[OP-002] Claim not found');
+      }
+      
+      // 4. Validate claim amount (KEEP existing validation!)
+      const claimValidation = validateClaimAmount(claim.claimAmount, claim.coverageAmount);
+      if (!claimValidation.isValid) {
+        throw new Error('[VAL-003] ' + (getFirstErrorMessage(claimValidation) || 'Claim exceeds coverage'));
+      }
+      
+      // 5. Check company state
+      if (!company) {
+        throw new Error('[STATE-003] Company not initialized');
+      }
+
+      // 6. Validate balance (KEEP existing validation!)
+      const balanceGuard = guardBalanceFloor(company.balance, claim.claimAmount);
+      if (!balanceGuard.isValid) {
+        throw new Error('[STATE-001] ' + (getFirstErrorMessage(balanceGuard) || 'Insufficient balance'));
+      }
+      
+      // 7. Log operation start
+      const op = logger.operation('Insurance', 'ApproveClaim');
+      
+      // 8. Process claim approval
+      useGameStore.getState().updateBalance(-claim.claimAmount);
+      
+      useGameStore.getState().addTransaction({
+        type: 'expense',
+        amount: claim.claimAmount,
+        category: 'claim-payout',
+        description: `${claim.claimType} claim payout to ${claim.policyHolderName}`,
+      });
+      
+      if (claim.claimType === 'death') {
+        setActivePolicies((prev) =>
+          prev.map((p) =>
+            p.id === claim.policyId ? { ...p, status: 'claimed' } : p
+          )
+        );
+        
+        useGameStore.getState().addClaimDecision({
+          id: crypto.randomUUID(),
+          policyId: claim.policyId,
+          policyHolderName: claim.policyHolderName,
+          holderAge: claim.holderAge,
+          claimType: claim.claimType,
+          claimAmount: claim.claimAmount,
+          coverageAmount: claim.coverageAmount,
+          decision: 'approved',
+          decisionDate: Date.now(),
+          reason: 'Death claim approved',
+          paidAmount: claim.claimAmount,
+        });
+      } else {
+        setActivePolicies((prev) =>
+          prev.map((p) =>
+            p.id === claim.policyId
+              ? { 
+                  ...p, 
+                  coverageAmount: p.coverageAmount - claim.claimAmount,
+                  originalCoverage: p.originalCoverage || p.coverageAmount,
+                }
+              : p
+          )
+        );
+      }
+      
+      setPendingClaims((prev) => prev.filter(c => c.id !== claimId));
       
       const currentInsurance = useGameStore.getState().insurance;
       if (currentInsurance) {
         useGameStore.setState({
           insurance: {
             ...currentInsurance,
-            totalPremiumCollected: currentInsurance.totalPremiumCollected + totalPremium,
+            totalClaimsPaid: currentInsurance.totalClaimsPaid + claim.claimAmount,
           },
         });
       }
-      
-      // Add notification
+
+      // 9. Log success
+      op.success('Claim approved', {
+        claimId,
+        policyHolderName: claim.policyHolderName,
+        claimType: claim.claimType,
+        amount: claim.claimAmount,
+      });
+
+      // 10. Notify user
       useGameStore.getState().addNotification({
-        type: 'info',
-        title: '💰 Premium Collected',
-        message: `Collected ${formatCurrency(totalPremium)} from ${premiumCount} active policies`,
+        type: 'success',
+        title: 'Claim Approved',
+        message: `Paid ${formatCurrency(claim.claimAmount)} to ${claim.policyHolderName}`,
       });
-    }
-    
-    transactionsToAdd.forEach((transaction) => {
-      useGameStore.getState().addTransaction(transaction);
-    });
-  }, [company?.isPaused, syncPoliciesToStore]);
 
-  // ✅ FIXED: Claim generation with batched notifications
-  const handleClaimGeneration = useCallback(() => {
-    if (company?.isPaused) return;
-    
-    const activeOnly = activePolicies.filter(p => p.status === 'active' || p.status === 'premium_waiver');
-    if (activeOnly.length === 0) return;
-    
-    // ✅ Batch all claims first
-    const newClaims: ClaimApplication[] = [];
-    
-    activeOnly.forEach((policy) => {
-      if (shouldGenerateClaim(policy, company?.difficulty)) {
-        const claimTypes = ['death', 'critical_illness', 'disability'] as const;
-        const claimType = claimTypes[Math.floor(Math.random() * claimTypes.length)];
-        const claimAmount = generateClaimAmount(policy);
-        
-        const claimReasons = {
-          death: 'Policyholder passed away',
-          critical_illness: 'Diagnosed with critical illness',
-          disability: 'Permanent disability claim',
-        };
-        
-        const newClaim: ClaimApplication = {
-          id: crypto.randomUUID(),
-          policyId: policy.id,
-          holderName: policy.holderName,
-          holderAge: policy.holderAge,
-          coverageAmount: policy.coverageAmount,
-          claimAmount,
-          claimType,
-          claimReason: claimReasons[claimType],
-          submittedAt: Date.now(),
-        };
-        
-        newClaims.push(newClaim);
+      return true;
+
+    } catch (error) {
+      // 11. Log error
+      logger.error('Insurance', 'Claim approval failed', error, { claimId });
+
+      // 12. Notify user
+      useGameStore.getState().addNotification({
+        type: 'error',
+        title: 'Claim Approval Failed',
+        message: error instanceof Error ? error.message.replace(/^\[.*?\]\s*/, '') : 'Unable to approve claim',
+      });
+
+      // 13. Graceful exit
+      return false;
+    }
+  };
+
+  // ✅ FULL TRY-CATCH: handleRejectClaim
+  const handleRejectClaim = async (claimId: string) => {
+    try {
+      // 1. Validate input
+      if (!claimId) {
+        throw new Error('[VAL-001] Claim ID is required');
       }
-    });
-    
-    // ✅ Update state once with all new claims
-    if (newClaims.length > 0) {
-      setPendingClaims((prev) => [...prev, ...newClaims]);
-      
-      // ✅ Send notifications AFTER state update
-      newClaims.forEach((claim) => {
-        useGameStore.getState().addNotification({
-          type: 'warning',
-          title: 'Life Insurance Claim Submitted',
-          message: `${claim.holderName} submitted ${claim.claimType.replace('_', ' ')} claim for ${formatCurrency(claim.claimAmount)}`,
-        });
-      });
-    }
-  }, [company?.isPaused, company?.difficulty, activePolicies]);
 
-  // Game time ticker
+      // 2. Validate array not empty (KEEP existing validation!)
+      const arrayGuard = guardArrayAccess(pendingClaims, 0, 'Pending Claims');
+      if (!arrayGuard.isValid) {
+        throw new Error('[STATE-005] ' + getFirstErrorMessage(arrayGuard));
+      }
+      
+      // 3. Find claim
+      const claim = pendingClaims.find(c => c.id === claimId);
+      if (!claim) {
+        throw new Error('[OP-002] Claim not found');
+      }
+
+      // 4. Log operation start
+      const op = logger.operation('Insurance', 'RejectClaim');
+      
+      // 5. Process rejection
+      setActivePolicies((prev) =>
+        prev.map((p) =>
+          p.id === claim.policyId ? { ...p, status: 'terminated' } : p
+        )
+      );
+      
+      if (claim.claimType === 'death') {
+        useGameStore.getState().addClaimDecision({
+          id: crypto.randomUUID(),
+          policyId: claim.policyId,
+          policyHolderName: claim.policyHolderName,
+          holderAge: claim.holderAge,
+          claimType: claim.claimType,
+          claimAmount: claim.claimAmount,
+          coverageAmount: claim.coverageAmount,
+          decision: 'rejected',
+          decisionDate: Date.now(),
+          reason: 'Claim rejected - policy terminated',
+        });
+      }
+      
+      setPendingClaims((prev) => prev.filter(c => c.id !== claimId));
+
+      // 6. Log success
+      op.success('Claim rejected', {
+        claimId,
+        policyHolderName: claim.policyHolderName,
+      });
+
+      // 7. Notify user
+      useGameStore.getState().addNotification({
+        type: 'warning',
+        title: 'Claim Rejected',
+        message: `Rejected claim from ${claim.policyHolderName}`,
+      });
+
+      return true;
+
+    } catch (error) {
+      // 8. Log error
+      logger.error('Insurance', 'Claim rejection failed', error, { claimId });
+
+      // 9. Notify user (optional)
+      useGameStore.getState().addNotification({
+        type: 'error',
+        title: 'Rejection Failed',
+        message: error instanceof Error ? error.message.replace(/^\[.*?\]\s*/, '') : 'Unable to reject claim',
+      });
+
+      // 10. Graceful exit
+      return false;
+    }
+  };
+
   useEffect(() => {
     if (!company || company.isPaused || !gameSpeed) return;
     
@@ -306,297 +464,33 @@ export default function LifeInsurancePage() {
     return () => clearInterval(gameTicker);
   }, [company, gameSpeed, updateGameTime]);
 
-  // Policy sales interval
   useEffect(() => {
-    if (!gameSpeed || !company?.difficulty) return;
+    if (!gameSpeed || !company) return;
     
     const baseInterval = calculateRealInterval(20, 'insurance', gameSpeed);
-    const adjustedInterval = getDifficultyAdjustedInterval(baseInterval, company.difficulty);
+    const adjustedInterval = company.difficulty 
+      ? getDifficultyAdjustedInterval(baseInterval, company.difficulty)
+      : baseInterval;
     
-    const policySalesInterval = setInterval(handlePolicySales, adjustedInterval);
-    return () => clearInterval(policySalesInterval);
-  }, [handlePolicySales, gameSpeed, company?.difficulty]);
+    const policyInterval = setInterval(handlePolicyGeneration, adjustedInterval);
+    return () => clearInterval(policyInterval);
+  }, [handlePolicyGeneration, gameSpeed, company?.difficulty]);
 
-  // Premium collection interval
   useEffect(() => {
     if (!gameSpeed) return;
     
-    const interval = calculateRealInterval(25, 'insurance', gameSpeed);
+    const interval = calculateRealInterval(30, 'insurance', gameSpeed);
     const premiumInterval = setInterval(handlePremiumCollection, interval);
     return () => clearInterval(premiumInterval);
   }, [handlePremiumCollection, gameSpeed]);
 
-  // Claim generation interval
   useEffect(() => {
     if (!gameSpeed) return;
     
-    const interval = calculateRealInterval(5, 'insurance', gameSpeed);
+    const interval = calculateRealInterval(30, 'insurance', gameSpeed);
     const claimInterval = setInterval(handleClaimGeneration, interval);
     return () => clearInterval(claimInterval);
   }, [handleClaimGeneration, gameSpeed]);
-
-  // ✅ FIXED: Approve claim with double-click prevention
-  const handleApproveClaim = useCallback((claimId: string) => {
-    // ✅ Prevent double-clicking
-    if (processingClaims.has(claimId)) {
-      console.log('⚠️ Already processing this claim');
-      return;
-    }
-    
-    const claim = pendingClaims.find((c) => c.id === claimId);
-    if (!claim) return;
-    
-    if (company && company.balance < claim.claimAmount) {
-      useGameStore.getState().addNotification({
-        type: 'error',
-        title: 'Insufficient Balance',
-        message: 'Not enough balance to pay this claim',
-      });
-      return;
-    }
-    
-    // ✅ Mark as processing
-    setProcessingClaims(prev => new Set(prev).add(claimId));
-    
-    // Pay claim
-    useGameStore.getState().updateBalance(-claim.claimAmount);
-    useGameStore.getState().addTransaction({
-      type: 'expense',
-      amount: claim.claimAmount,
-      category: 'life-insurance-claim',
-      description: `${claim.claimType.replace('_', ' ')} claim paid to ${claim.holderName}`,
-    });
-    
-    // Update insurance stats
-    const currentInsurance = useGameStore.getState().insurance;
-    if (currentInsurance) {
-      useGameStore.setState({
-        insurance: {
-          ...currentInsurance,
-          totalClaimsPaid: currentInsurance.totalClaimsPaid + claim.claimAmount,
-        },
-      });
-    }
-    
-    // ✅ Prepare claim decision (don't add yet)
-    let claimDecision: any = null;
-    let notificationMessage = '';
-    let notificationTitle = '';
-    
-    // Handle different claim types
-    setActivePolicies((prev) => {
-      const updated = prev.map((policy) => {
-        if (policy.id !== claim.policyId) return policy;
-        
-        switch (claim.claimType) {
-          case 'death':
-            notificationTitle = 'Death Claim Approved';
-            notificationMessage = `Paid ${formatCurrency(claim.claimAmount)} to ${claim.holderName}'s beneficiary.`;
-            
-            claimDecision = {
-              id: crypto.randomUUID(),
-              policyId: policy.id,
-              policyHolderName: policy.holderName,
-              holderAge: policy.holderAge,
-              claimType: claim.claimType,
-              claimAmount: claim.claimAmount,
-              coverageAmount: policy.coverageAmount,
-              decision: 'approved' as const,
-              decisionDate: Date.now(),
-              reason: 'Death claim approved and paid',
-              paidAmount: claim.claimAmount,
-            };
-            
-            return { ...policy, status: 'claimed' as const };
-            
-          case 'critical_illness':
-            const newCoverage = Math.max(0, policy.coverageAmount - claim.claimAmount);
-            
-            notificationTitle = 'Critical Illness Claim Approved';
-            notificationMessage = `Paid ${formatCurrency(claim.claimAmount)}. Coverage reduced to ${formatCurrency(newCoverage)}.`;
-            
-            claimDecision = {
-              id: crypto.randomUUID(),
-              policyId: policy.id,
-              policyHolderName: policy.holderName,
-              holderAge: policy.holderAge,
-              claimType: claim.claimType,
-              claimAmount: claim.claimAmount,
-              coverageAmount: policy.coverageAmount,
-              decision: 'approved' as const,
-              decisionDate: Date.now(),
-              reason: 'Critical illness claim approved, coverage reduced',
-              paidAmount: claim.claimAmount,
-            };
-            
-            return {
-              ...policy,
-              coverageAmount: newCoverage,
-              originalCoverage: policy.originalCoverage || policy.coverageAmount,
-            };
-            
-          case 'disability':
-            notificationTitle = 'Disability Claim Approved';
-            notificationMessage = `Paid ${formatCurrency(claim.claimAmount)}. Premium waived, coverage continues.`;
-            
-            claimDecision = {
-              id: crypto.randomUUID(),
-              policyId: policy.id,
-              policyHolderName: policy.holderName,
-              holderAge: policy.holderAge,
-              claimType: claim.claimType,
-              claimAmount: claim.claimAmount,
-              coverageAmount: policy.coverageAmount,
-              decision: 'approved' as const,
-              decisionDate: Date.now(),
-              reason: 'Disability claim approved, premium waived',
-              paidAmount: claim.claimAmount,
-            };
-            
-            return {
-              ...policy,
-              status: 'premium_waiver' as const,
-              coverageAmount: Math.max(0, policy.coverageAmount - claim.claimAmount),
-              originalCoverage: policy.originalCoverage || policy.coverageAmount,
-            };
-            
-          default:
-            return policy;
-        }
-      });
-      
-      syncPoliciesToStore(updated);
-      return updated;
-    });
-    
-    // ✅ Add to history ONCE, outside of setState
-    if (claimDecision) {
-      useGameStore.getState().addClaimDecision(claimDecision);
-    }
-    
-    // ✅ Add notification ONCE
-    if (notificationMessage) {
-      useGameStore.getState().addNotification({
-        type: 'success',
-        title: notificationTitle,
-        message: notificationMessage,
-      });
-    }
-    
-    // Remove from pending
-    setPendingClaims((prev) => prev.filter((c) => c.id !== claimId));
-    
-    // ✅ Remove from processing after a delay
-    setTimeout(() => {
-      setProcessingClaims(prev => {
-        const next = new Set(prev);
-        next.delete(claimId);
-        return next;
-      });
-    }, 1000);
-  }, [pendingClaims, company, processingClaims, syncPoliciesToStore]);
-
-  // ✅ FIXED: Reject claim with double-click prevention
-  const handleRejectClaim = useCallback((claimId: string) => {
-    // ✅ Prevent double-clicking
-    if (processingClaims.has(claimId)) {
-      console.log('⚠️ Already processing this claim');
-      return;
-    }
-    
-    const claim = pendingClaims.find((c) => c.id === claimId);
-    if (!claim) return;
-    
-    // ✅ Mark as processing
-    setProcessingClaims(prev => new Set(prev).add(claimId));
-    
-    // Handle death claim rejection
-    if (claim.claimType === 'death') {
-      // Person already dead → Terminate policy
-      setActivePolicies((prev) => {
-        const updated = prev.map((policy) => {
-          if (policy.id !== claim.policyId) return policy;
-          return { ...policy, status: 'terminated' as const };
-        });
-        
-        syncPoliciesToStore(updated);
-        return updated;
-      });
-      
-      // ✅ Add to history ONCE
-      useGameStore.getState().addClaimDecision({
-        id: crypto.randomUUID(),
-        policyId: claim.policyId,
-        policyHolderName: claim.holderName,
-        holderAge: claim.holderAge,
-        claimType: claim.claimType,
-        claimAmount: claim.claimAmount,
-        coverageAmount: claim.coverageAmount,
-        decision: 'rejected',
-        decisionDate: Date.now(),
-        reason: 'Death claim rejected - not paid',
-      });
-      
-      useGameStore.getState().addNotification({
-        type: 'warning',
-        title: 'Death Claim Rejected',
-        message: `Rejected death claim from ${claim.holderName}. Policy terminated. Reputation -15.`,
-      });
-      
-      // Bigger reputation penalty
-      const currentCompany = useGameStore.getState().company;
-      if (currentCompany) {
-        useGameStore.setState({
-          company: {
-            ...currentCompany,
-            reputation: Math.max(0, currentCompany.reputation - 15),
-          },
-        });
-      }
-    } else {
-      // Non-death claim rejection
-      useGameStore.getState().addClaimDecision({
-        id: crypto.randomUUID(),
-        policyId: claim.policyId,
-        policyHolderName: claim.holderName,
-        holderAge: claim.holderAge,
-        claimType: claim.claimType,
-        claimAmount: claim.claimAmount,
-        coverageAmount: claim.coverageAmount,
-        decision: 'rejected',
-        decisionDate: Date.now(),
-        reason: `${claim.claimType.replace('_', ' ')} claim rejected`,
-      });
-      
-      useGameStore.getState().addNotification({
-        type: 'warning',
-        title: `${claim.claimType.replace('_', ' ')} Claim Rejected`,
-        message: `Rejected claim from ${claim.holderName}. Reputation -10.`,
-      });
-      
-      const currentCompany = useGameStore.getState().company;
-      if (currentCompany) {
-        useGameStore.setState({
-          company: {
-            ...currentCompany,
-            reputation: Math.max(0, currentCompany.reputation - 10),
-          },
-        });
-      }
-    }
-    
-    // Remove from pending
-    setPendingClaims((prev) => prev.filter((c) => c.id !== claimId));
-    
-    // ✅ Remove from processing after a delay
-    setTimeout(() => {
-      setProcessingClaims(prev => {
-        const next = new Set(prev);
-        next.delete(claimId);
-        return next;
-      });
-    }, 1000);
-  }, [pendingClaims, processingClaims, syncPoliciesToStore]);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('id-ID', {
@@ -606,7 +500,6 @@ export default function LifeInsurancePage() {
     }).format(amount);
   };
 
-  // Loading screen
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -621,57 +514,23 @@ export default function LifeInsurancePage() {
   if (!player || !company || !insurance) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-gray-600">Initializing...</div>
+        <div className="text-center">
+          <div className="text-gray-600">Initializing...</div>
+        </div>
       </div>
     );
   }
 
-  // Filter active policies for display
-  const activeDisplayPolicies = activePolicies.filter(
-    p => p.status === 'active' || p.status === 'premium_waiver'
-  );
-  
-  const claimHistory = insurance?.claimHistory || [];
-
   return (
     <div className="min-h-screen bg-gray-50">
       <AutoSaveManager />
+      <Toast />
       <Header />
       
       <div className="max-w-7xl mx-auto px-4 py-6 space-y-6">
-        {/* Page Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg p-6 text-white">
-          <h1 className="text-3xl font-bold mb-2">Life Insurance Business</h1>
-          <p className="text-blue-100">
-            Provide financial protection for families through life insurance policies
-          </p>
-        </div>
-        
         <TimeDisplay businessType="insurance" />
-        <InsuranceStats />
+        <LifeStats />
         
-        {/* Active Policies Section */}
-        <div>
-          <h2 className="text-xl font-bold text-gray-900 mb-4">
-            📋 Active Policies ({activeDisplayPolicies.length})
-          </h2>
-          
-          {activeDisplayPolicies.length === 0 ? (
-            <div className="bg-white rounded-lg shadow border border-gray-200 p-8 text-center">
-              <div className="text-4xl mb-3">📄</div>
-              <p className="text-gray-600 font-semibold">No active policies</p>
-              <p className="text-sm text-gray-500 mt-2">New policies will appear automatically</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {activeDisplayPolicies.map((policy) => (
-                <LifePolicyCard key={policy.id} policy={policy} />
-              ))}
-            </div>
-          )}
-        </div>
-        
-        {/* Pending Claims Section */}
         <div>
           <h2 className="text-xl font-bold text-gray-900 mb-4">
             ⚠️ Pending Claims ({pendingClaims.length})
@@ -679,10 +538,10 @@ export default function LifeInsurancePage() {
           
           {pendingClaims.length === 0 ? (
             <div className="bg-white rounded-lg shadow border border-gray-200 p-8 text-center">
-              <div className="text-4xl mb-3">✅</div>
+              <div className="text-4xl mb-3">📋</div>
               <p className="text-gray-600 font-semibold">No pending claims</p>
               <p className="text-sm text-gray-500 mt-2">
-                Claims will appear here when submitted
+                Claim applications will appear here
               </p>
             </div>
           ) : (
@@ -693,15 +552,37 @@ export default function LifeInsurancePage() {
                   claim={claim}
                   onApprove={handleApproveClaim}
                   onReject={handleRejectClaim}
-                  isProcessing={processingClaims.has(claim.id)}
                 />
               ))}
             </div>
           )}
         </div>
         
-        {/* Claim History Section */}
-        <ClaimHistoryPanel claimHistory={claimHistory} />
+        <div>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">
+            📋 Active Policies ({activePolicies.filter(p => p.status === 'active').length})
+          </h2>
+          
+          {activePolicies.length === 0 ? (
+            <div className="bg-white rounded-lg shadow border border-gray-200 p-8 text-center">
+              <div className="text-4xl mb-3">📄</div>
+              <p className="text-gray-600 font-semibold">No active policies yet</p>
+              <p className="text-sm text-gray-500 mt-2">
+                New policy applications will appear automatically
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {activePolicies.map((policy) => (
+                <LifePolicyCard key={policy.id} policy={policy} />
+              ))}
+            </div>
+          )}
+        </div>
+        
+        {insurance.claimHistory && insurance.claimHistory.length > 0 && (
+          <ClaimHistoryPanel claimHistory={insurance.claimHistory} />
+        )}
       </div>
     </div>
   );

@@ -3,10 +3,14 @@
 // PURPOSE: TypeScript type definitions (MVP only)
 // RELATIONS: Used by gameStore.ts, all components
 // UPDATED: 2024-11-14 (Added claim history support)
+// UPDATED: 2024-12-XX (Added NotificationType export for notifications-with-recovery)
 // ============================================
 
 export type BusinessType = 'fintech' | 'insurance' | 'investment';
 export type DifficultyLevel = 'easy' | 'medium' | 'hard';
+
+// ✅ ADD: Export NotificationType for notifications-with-recovery.ts
+export type NotificationType = 'info' | 'success' | 'warning' | 'error';
 
 export interface Player {
   id: string;
@@ -46,7 +50,7 @@ export interface Transaction {
 export interface GameNotification {
   id: string;
   timestamp: number;
-  type: 'info' | 'success' | 'warning' | 'error';
+  type: NotificationType; // ✅ CHANGED: Use NotificationType instead of inline type
   title: string;
   message: string;
   read: boolean;
@@ -59,7 +63,7 @@ export type BusinessSubType =
   | 'health-insurance' 
   | 'venture-capital';
 
-// ✅ NEW: Policy status types
+// ✓ NEW: Policy status types
 export type PolicyStatus = 
   | 'active'          // Normal - collecting premium
   | 'premium_waiver'  // Disability - no premium, still covered
@@ -67,7 +71,7 @@ export type PolicyStatus =
   | 'expired'         // Contract ended naturally
   | 'terminated';     // Death claim rejected - terminated
 
-// ✅ NEW: Claim decision record
+// ✓ NEW: Claim decision record
 export interface ClaimDecision {
   id: string;
   policyId: string;
@@ -80,6 +84,19 @@ export interface ClaimDecision {
   decisionDate: number;
   reason: string;
   paidAmount?: number; // For approved claims
+}
+
+// Claim application for pending claims
+export interface ClaimApplication {
+  id: string;
+  policyId: string;
+  policyHolderName: string;
+  holderAge: number;
+  claimType: 'death' | 'critical_illness' | 'disability';
+  claimAmount: number;
+  coverageAmount: number;
+  submittedAt: number;
+  claimReason?: string;
 }
 
 // Fintech State
@@ -105,15 +122,15 @@ export interface Loan {
   totalRepayment: number;
 }
 
-// ✅ UPDATED: Life Insurance Policy with new fields
+// ✓ UPDATED: Life Insurance Policy with new fields
 export interface LifeInsurancePolicy {
   id: string;
   holderName: string;
   holderAge: number;
   coverageAmount: number;
-  originalCoverage?: number; // ✅ Track original coverage amount
+  originalCoverage?: number; // ✓ Track original coverage amount
   premiumMonthly: number;
-  status: PolicyStatus; // ✅ Updated to use PolicyStatus
+  status: PolicyStatus; // ✓ Updated to use PolicyStatus
   startDate: number;
   endDate: number;
   beneficiaryName: string;
@@ -123,14 +140,26 @@ export interface LifeInsurancePolicy {
 // Keep backward compatibility
 export type Policy = LifeInsurancePolicy;
 
-// ✅ UPDATED: Insurance State with claim history
+// ✓ UPDATED: Insurance State with claim history
 export interface InsuranceState {
   totalPremiumCollected: number;
   totalClaimsPaid: number;
   claimRatio: number;
   activePolicies: number;
   currentPolicies: LifeInsurancePolicy[];
-  claimHistory?: ClaimDecision[]; // ✅ NEW: Claim decision history
+  claimHistory?: ClaimDecision[];
+  pendingClaims?: ClaimApplication[];  // ✓ Added
+}
+
+// ADD this interface
+export interface DealOpportunity {
+  id: string;
+  targetName: string;
+  sector: string;
+  valuation: number;
+  equityOffered: number;
+  investmentNeeded: number;
+  pitchSummary: string;
 }
 
 // Investment State
@@ -139,7 +168,7 @@ export interface InvestmentState {
   totalReturn: number;
   activeInvestments: number;
   portfolio: Investment[];
-  currentDeals: any[];
+  currentDeals: DealOpportunity[];
 }
 
 export interface Investment {

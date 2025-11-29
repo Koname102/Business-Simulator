@@ -1,5 +1,8 @@
 {
   "rules": {
+    // ============================================
+    // EXISTING RULES (Module Separation)
+    // ============================================
     "no-restricted-imports": [
       "error",
       {
@@ -18,6 +21,69 @@
           }
         ]
       }
-    ]
-  }
+    ],
+    
+    // ============================================
+    // NEW: ERROR HANDLING RULES (Issue #5 - Nice to Have)
+    // ============================================
+    
+    // Prevent console.log in production (allow console.error for debugging)
+    "no-console": ["warn", { 
+      "allow": ["error", "warn"] 
+    }],
+    
+    // Require proper error objects in throw statements
+    "no-throw-literal": "error",
+    
+    // Ensure promises are handled
+    "@typescript-eslint/no-floating-promises": "error",
+    
+    // Require await in async functions
+    "require-await": "warn",
+    
+    // Prevent unnecessary return await
+    "no-return-await": "error",
+    
+    // Ensure error parameters are used in catch blocks
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    
+    // Prevent empty catch blocks (must handle or log errors)
+    "no-empty": ["error", { 
+      "allowEmptyCatch": false 
+    }],
+    
+    // Require consistent error handling
+    "@typescript-eslint/no-throw-literal": "error",
+    
+    // Prefer promise rejection with Error objects
+    "prefer-promise-reject-errors": ["error", {
+      "allowEmptyReject": false
+    }],
+    
+    // Require proper error types in try-catch
+    "@typescript-eslint/strict-boolean-expressions": ["warn", {
+      "allowNullableObject": true,
+      "allowNullableBoolean": true
+    }]
+  },
+  
+  // ============================================
+  // OVERRIDES: Test files dapat menggunakan console.log
+  // ============================================
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*.ts", "**/__tests__/**/*.tsx", "**/*.test.ts", "**/*.test.tsx"],
+      "rules": {
+        "no-console": "off",
+        "@typescript-eslint/no-floating-promises": "off"
+      }
+    }
+  ]
 }

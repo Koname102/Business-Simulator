@@ -1,0 +1,149 @@
+name: Documentation
+
+description: Suggest improvements or additions to documentation
+
+title: "[DOCS] "
+
+labels: ["documentation", "priority: low"]
+
+body:
+
+  - type: markdown
+
+    attributes:
+
+      value: |
+
+        Help us improve our documentation!
+
+ 
+
+  - type: dropdown
+
+    id: doc-type
+
+    attributes:
+
+      label: Documentation Type
+
+      description: What type of documentation is this about?
+
+      options:
+
+        - Code Documentation (JSDoc, comments)
+
+        - User Guide / Tutorial
+
+        - API Documentation
+
+        - README
+
+        - Contributing Guide
+
+        - Architecture Documentation
+
+        - Other
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: dropdown
+
+    id: issue-type
+
+    attributes:
+
+      label: Issue Type
+
+      description: What kind of documentation issue is this?
+
+      options:
+
+        - Missing documentation
+
+        - Incorrect/outdated information
+
+        - Unclear/confusing explanation
+
+        - Typo/grammar
+
+        - Improvement suggestion
+
+        - Translation request
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: input
+
+    id: location
+
+    attributes:
+
+      label: Location
+
+      description: Where is this documentation (or where should it be)?
+
+      placeholder: "e.g., README.md line 45, or lib/game-logic/fintech.ts"
+
+ 
+
+  - type: textarea
+
+    id: description
+
+    attributes:
+
+      label: Description
+
+      description: Describe the documentation issue or suggestion
+
+      placeholder: |
+
+        The documentation for [X] is unclear because...
+
+        There should be documentation about...
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: suggestion
+
+    attributes:
+
+      label: Suggested Improvement
+
+      description: How should the documentation be improved?
+
+      placeholder: |
+
+        The documentation should explain...
+
+        Add a section about...
+
+        Correct the information to say...
+
+ 
+
+  - type: textarea
+
+    id: additional
+
+    attributes:
+
+      label: Additional Context
+
+      description: Any other information
+
+      placeholder: Any additional details...

@@ -1,5 +1,5 @@
 // ============================================
-// FILE: components/game/insurance/InsuranceStats.tsx
+// FILE: components/game/insurance/LifeStats.tsx
 // PURPOSE: Insurance-specific stats display
 // RELATIONS: Uses gameStore insurance state
 // ============================================
@@ -9,7 +9,7 @@
 import { useGameStore } from '@/store/gameStore';
 import { calculateClaimRatio } from '@/lib/game-logic/life-insurance';
 
-export default function InsuranceStats() {
+export default function LifeStats() {
   const company = useGameStore((state) => state.company);
   const insurance = useGameStore((state) => state.insurance);
   

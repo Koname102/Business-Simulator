@@ -5,6 +5,8 @@
 // UPDATED: 2024-11-08 (Initial MVP version)
 // ============================================
 
+import { guardDivisionByZero } from '@/lib/validation';
+
 export const GAME_CONFIG = {
   TICK_INTERVAL: 1000,
   GAME_SPEED: 1,
@@ -54,9 +56,14 @@ export const COLORS = {
 
 export const FORMULAS = {
   calculateLoanRepayment: (principal: number, rate: number, duration: number): number => {
+    if (duration === 0) {
+    console.error('[calculateLoanRepayment] Duration cannot be zero');
+    return principal; 
+  }
     const r = rate / 100;
-    const t = duration / 12;
-    const total = principal * Math.pow(1 + r, t);
+    const years = duration / 12;
+    const totalInterest = principal * r * years;
+    const total = principal + totalInterest;
     return Math.round(total);
   },
   

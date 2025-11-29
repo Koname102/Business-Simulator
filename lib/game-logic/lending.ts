@@ -7,6 +7,7 @@
 import type { Loan, DifficultyLevel } from '@/lib/types';
 import { BUSINESS_CONFIG, FORMULAS } from '@/lib/constants';
 import { getInterestRateRange, getDefaultRisk } from '@/lib/difficulty-config';
+import { guardDivisionByZero, getFirstErrorMessage } from '@/lib/validation';
 
 // ✅ UPDATED: Add difficulty parameter
 export function generateLoanApplication(difficulty?: DifficultyLevel): Loan {
@@ -44,6 +45,11 @@ export function generateLoanApplication(difficulty?: DifficultyLevel): Loan {
 }
 
 export function calculateMonthlyPayment(loan: Loan): number {
+  const guard = guardDivisionByZero(loan.duration, 'Monthly payment calculation');
+  if (!guard.isValid) {
+    console.error('[calculateMonthlyPayment]', getFirstErrorMessage(guard));
+    return 0; 
+  }
   const totalRepayment = FORMULAS.calculateLoanRepayment(
     loan.amount,
     loan.interestRate,

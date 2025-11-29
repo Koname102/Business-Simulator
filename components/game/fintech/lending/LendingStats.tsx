@@ -1,5 +1,5 @@
 // ============================================
-// FILE: components/game/fintech/FintechStats.tsx
+// FILE: components/game/fintech/LendingStats.tsx
 // PURPOSE: Fintech-specific stats cards
 // RELATIONS: Uses gameStore fintech state
 // ============================================
@@ -7,9 +7,9 @@
 'use client';
 
 import { useGameStore } from '@/store/gameStore';
-import { calculateDefaultRate } from '@/lib/game-logic/fintech';
+import { calculateDefaultRate } from '@/lib/game-logic/lending';
 
-export default function FintechStats() {
+export default function LendingStats() {
   const company = useGameStore((state) => state.company);
   const fintech = useGameStore((state) => state.fintech);
   
@@ -28,7 +28,7 @@ export default function FintechStats() {
     return new Intl.NumberFormat('id-ID').format(num);
   };
   
-  const defaultRate = calculateDefaultRate(fintech.loans);
+  const defaultRate = calculateDefaultRate(fintech.currentLoans || []);
   
   const profit = fintech.totalRepaid - fintech.totalDisbursed;
   const profitPercentage = fintech.totalDisbursed > 0 

@@ -6,7 +6,7 @@
 
 'use client';
 
-import { getSectorIcon } from '@/lib/game-logic/investment';
+import { getSectorIcon } from '@/lib/game-logic/venture';
 
 interface DealFlowCardProps {
   deal: {

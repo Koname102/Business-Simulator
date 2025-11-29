@@ -4,6 +4,7 @@
 
 import type { LifeInsurancePolicy, DifficultyLevel } from '@/lib/types';
 import { FORMULAS } from '@/lib/constants';
+import { guardTimestamp } from '@/lib/validation';
 
 export function generateNewPolicy(difficulty?: DifficultyLevel): LifeInsurancePolicy {
   const minAge = 18;
@@ -83,12 +84,12 @@ export function calculatePremium(
   return Math.round(annualPremium / 12);
 }
 
-// ✅ UPDATED: Much lower claim probability
+// âœ… UPDATED: Much lower claim probability
 export function shouldGenerateClaim(
   policy: LifeInsurancePolicy,
   difficulty?: DifficultyLevel
 ): boolean {
-  // ✅ Base: 0.5% per month (was 10%)
+  // âœ… Base: 0.5% per month (was 10%)
   let probability = 0.005; // 0.5% base chance per MONTH
   
   // Age risk multiplier
@@ -136,6 +137,14 @@ export function calculateClaimRatio(
 }
 
 export function shouldPolicyExpire(policy: LifeInsurancePolicy): boolean {
+  // ✅ ADD: Validate timestamp
+  const timestampGuard = guardTimestamp(policy.endDate, 'Policy end date');
+  if (!timestampGuard.isValid) {
+    console.error('[shouldPolicyExpire] Invalid timestamp:', policy.endDate);
+    return false; 
+  }
+  
+
   return Date.now() >= policy.endDate;
 }
 

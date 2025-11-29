@@ -1,9 +1,10 @@
 // ============================================
-// FILE: components/game/insurance/LifePolicyCard.tsx
+// FILE: components/game/insurance/life/LifePolicyCard.tsx (FIXED)
+// UPDATED: Show health status only, no age risk label
 // ============================================
 
 import type { LifeInsurancePolicy } from '@/lib/types';
-import { getHealthStatusColor, getAgeRiskLevel } from '@/lib/game-logic/life-insurance';
+import { getHealthStatusColor } from '@/lib/game-logic/life-insurance';
 
 export default function LifePolicyCard({ policy }: { policy: LifeInsurancePolicy }) {
   const formatCurrency = (amount: number) => {
@@ -17,13 +18,13 @@ export default function LifePolicyCard({ policy }: { policy: LifeInsurancePolicy
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active': return 'bg-green-100 text-green-700';
+      case 'premium_waiver': return 'bg-blue-100 text-blue-700';
       case 'expired': return 'bg-gray-100 text-gray-700';
       case 'claimed': return 'bg-red-100 text-red-700';
+      case 'terminated': return 'bg-red-100 text-red-700';
       default: return 'bg-gray-100 text-gray-700';
     }
   };
-  
-  const ageRisk = getAgeRiskLevel(policy.holderAge);
   
   return (
     <div className="bg-white rounded-lg shadow border border-gray-200 p-4 hover:shadow-lg transition-shadow">
@@ -32,13 +33,10 @@ export default function LifePolicyCard({ policy }: { policy: LifeInsurancePolicy
           <h3 className="font-bold text-gray-900 text-lg">{policy.holderName}</h3>
           <div className="flex items-center gap-2 mt-1">
             <span className="text-sm text-gray-600">Age: {policy.holderAge}</span>
-            <span className={`text-xs font-semibold ${ageRisk.color}`}>
-              {ageRisk.label}
-            </span>
           </div>
         </div>
         <span className={`px-2 py-1 text-xs rounded font-semibold ${getStatusColor(policy.status)}`}>
-          {policy.status.toUpperCase()}
+          {policy.status.toUpperCase().replace('_', ' ')}
         </span>
       </div>
       

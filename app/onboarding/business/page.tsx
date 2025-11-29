@@ -153,10 +153,10 @@ export default function BusinessOnboarding() {
     
     // Route based on sub-type
     const routeMap: Record<BusinessSubType, string> = {
-      'fintech-lending': '/game/fintech',
+      'fintech-lending': '/game/fintech/lending',
       'life-insurance': '/game/insurance/life',
       'health-insurance': '/game/insurance/health',
-      'venture-capital': '/game/investment',
+      'venture-capital': '/game/investment/venture',
     };
     
     router.push(routeMap[businessSubType]);

@@ -11,7 +11,7 @@ import {
   calculateMonthlyPayment, 
   calculateTotalRepayment,
   getCreditScoreLabel 
-} from '@/lib/game-logic/fintech';
+} from '@/lib/game-logic/lending';
 
 interface LoanApplicationCardProps {
   loan: Loan;

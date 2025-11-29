@@ -1,0 +1,261 @@
+name: Feature Request
+
+description: Suggest a new feature for the game
+
+title: "[FEATURE] "
+
+labels: ["feature", "priority: low"]
+
+body:
+
+  - type: markdown
+
+    attributes:
+
+      value: |
+
+        Thanks for suggesting a new feature! Please provide as much detail as possible.
+
+ 
+
+  - type: dropdown
+
+    id: category
+
+    attributes:
+
+      label: Feature Category
+
+      description: What type of feature is this?
+
+      options:
+
+        - New Business Mode
+
+        - Game Mechanic
+
+        - UI/UX Improvement
+
+        - Social/Multiplayer
+
+        - Save/Load System
+
+        - Performance
+
+        - Accessibility
+
+        - Other
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: dropdown
+
+    id: priority
+
+    attributes:
+
+      label: Priority (Your Opinion)
+
+      description: How important is this feature to you?
+
+      options:
+
+        - Must have
+
+        - Should have
+
+        - Nice to have
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: problem
+
+    attributes:
+
+      label: Problem Statement
+
+      description: What problem does this feature solve? What need does it address?
+
+      placeholder: |
+
+        Currently, players can't...
+
+        This makes it difficult to...
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: solution
+
+    attributes:
+
+      label: Proposed Solution
+
+      description: Describe the feature you'd like to see implemented
+
+      placeholder: |
+
+        I would like to see...
+
+        This feature would work by...
+
+    validations:
+
+      required: true
+
+ 
+
+  - type: textarea
+
+    id: alternatives
+
+    attributes:
+
+      label: Alternative Solutions
+
+      description: Have you considered any alternative solutions or features?
+
+      placeholder: |
+
+        Alternatively, we could...
+
+        Another approach might be...
+
+ 
+
+  - type: textarea
+
+    id: examples
+
+    attributes:
+
+      label: Examples/References
+
+      description: Are there examples of this feature in other games or apps?
+
+      placeholder: |
+
+        Similar to how [Game X] does...
+
+        Like the feature in [App Y]...
+
+ 
+
+  - type: dropdown
+
+    id: business-mode
+
+    attributes:
+
+      label: Business Mode
+
+      description: Which business mode(s) does this feature relate to?
+
+      multiple: true
+
+      options:
+
+        - Fintech (P2P Lending)
+
+        - Life Insurance
+
+        - Health Insurance
+
+        - Investment/VC
+
+        - All modes
+
+        - New business mode
+
+        - Not mode-specific
+
+ 
+
+  - type: textarea
+
+    id: user-story
+
+    attributes:
+
+      label: User Story
+
+      description: "Describe this feature as a user story (optional)"
+
+      placeholder: |
+
+        As a [type of user], I want [goal] so that [benefit]
+
+ 
+
+        Example:
+
+        As a player, I want to see graphs of my revenue over time so that I can better understand my business performance.
+
+ 
+
+  - type: textarea
+
+    id: acceptance
+
+    attributes:
+
+      label: Acceptance Criteria
+
+      description: "What needs to be true for this feature to be considered complete? (optional)"
+
+      placeholder: |
+
+        - [ ] Criterion 1
+
+        - [ ] Criterion 2
+
+        - [ ] Criterion 3
+
+ 
+
+  - type: textarea
+
+    id: additional
+
+    attributes:
+
+      label: Additional Context
+
+      description: Add any other context, mockups, or screenshots about the feature
+
+      placeholder: Any additional information...
+
+ 
+
+  - type: checkboxes
+
+    id: contribution
+
+    attributes:
+
+      label: Contribution
+
+      description: Would you be interested in contributing to this feature?
+
+      options:
+
+        - label: I'd be willing to help implement this feature
+
+        - label: I can help with design/mockups
+
+        - label: I can help with testing

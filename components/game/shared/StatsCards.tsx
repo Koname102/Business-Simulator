@@ -7,7 +7,7 @@
 'use client';
 
 import { useGameStore } from '@/store/gameStore';
-import { calculateDefaultRate } from '@/lib/game-logic/fintech';
+import { calculateDefaultRate } from '@/lib/game-logic/lending';
 
 export default function StatsCards() {
   const fintech = useGameStore((state) => state.fintech);
