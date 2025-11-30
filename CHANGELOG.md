@@ -1,202 +1,103 @@
-# Changelog - Business Simulator
+# Changelog
 
- 
+All notable changes to Business Simulator will be documented in this file.
 
-All notable changes to this project will be documented in this file.
-
- 
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-
- 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-
- 
 
 ## [Unreleased]
 
- 
+### v0.0.3 - Systems & Depth (Planned)
+**Timeline:** 6-8 weeks  
+**Status:** Planning
 
-### Planned
+#### Added
+- Random market events system (economic boom, recession, interest rate changes)
+- Regulatory changes system (new laws, compliance costs, government policies)
+- Black swan events (pandemic, banking crisis, government bailout)
+- Employee hiring system (CFO, Risk Manager, Analyst)
+- Employee management and training system
+- Level and XP progression system
+- Skill tree foundation (Risk Management, Growth, Efficiency)
+- Multiple loan products (Personal, Business, Payday loans)
+- Market conditions for investment (bull/bear markets, sector trends)
+- Game speed controls and settings menu
 
-- Mobile responsiveness improvements
+#### Enhanced
+- Credit scoring system with borrower profiles and credit history
+- Claims system with investigation and fraud detection
+- Notification preferences and customization
+- Auto-save frequency configuration
 
-- Additional business types (Retail, Manufacturing)
+#### Changed
+- N/A
 
-- Tutorial/onboarding system
-
-- Achievement/trophy system
-
-
- 
+#### Bug Fixed
+- N/A
 
 ---
 
-
- 
-
-## System Features Summary
-
- 
-
-### Alpha Release (v0.0.1)
-
- 
-
-#### **Core Systems**
-
-1. ✅ **Character Creation Flow**
-
-   - Name customization
-
-   - Initial setup configuration
-
- 
-
-2. ✅ **Company Creation Flow**
-
-   - Business type selection (Fintech/Insurance/Investment)
-
-   - Difficulty level selection
-
-   - Starting capital configuration
-
- 
-
-3. ✅ **Time & Progression System**
-
-   - Dynamic game time
-
-   - Pause/Resume controls
-
-   - Time-based event triggers
-
- 
-
-4. ✅ **Save & Load System**
-
-   - Multiple save slots
-
-   - Auto-save functionality (every 30s)
-
-   - Save metadata tracking
-
-   - Import/Export saves
-
- 
-
-#### **Business Game Modes**
-
- 
-
-5. ✅ **Fintech Mechanic System (P2P Lending)**
-
-   - Loan application processing
-
-   - Credit score evaluation
-
-   - Interest rate calculation
-
-   - Repayment tracking
-
-   - Default risk management
-
-   - Customer relationship tracking
-
- 
-
-6. ✅ **Life Insurance Mechanic System**
-
-   - Policy issuance and management
-
-   - Premium calculation based on age/health
-
-   - Claims processing (death benefits)
-
-   - Policy status tracking
-
-   - Actuarial calculations
-
- 
-
-7. ✅ **Health Insurance Mechanic System**
-
-   - Health policy management
-
-   - Premium collection
-
-   - Medical claims processing
-
-   - Coverage tracking
-
-   - Customer health monitoring
-
- 
-
-8. ✅ **Venture Capital Mechanic System**
-
-   - Investment portfolio management
-
-   - AUM (Assets Under Management) tracking
-
-   - 12-sector investment options
-
-   - Deal evaluation and selection
-
-   - Portfolio returns calculation
-
-   - Market volatility simulation
-
- 
-
-#### **Game Balance & Difficulty**
-
-- ✅ Three difficulty levels (Easy/Medium/Hard)
-
-- ✅ Dynamic starting capital (1.5x - 1.0x multipliers)
-
-- ✅ Adjustable risk parameters
-
-- ✅ Balanced progression curves
-
- 
+## [Released]
+
+### [v0.0.2] - Core Stability - 30-11-2025
+
+**Status:** Released
+
+#### Added
+- Comprehensive error handling system across all game modules
+- Input validation for all user actions
+- Error tracking and analytics system
+- Recovery suggestions with actionable guidance
+- Notification system with error recovery actions
+- TypeScript strict mode enforcement
+- ESLint error handling rules
+- Edge case testing suite
+- Complete documentation for error handling
+
+#### Enhanced
+- Save manager with version compatibility checking
+- Auto-save manager with configurable intervals
+- Save/load menu with backup restoration
+- Game store with error prevention on critical functions
+- Logger system for better debugging
+
+#### Changed
+- Replaced console statements with logger system throughout codebase
+
+#### Bug Fixed
+- Null reference errors in game state access
+- Array out-of-bounds crashes
+- Division by zero in return calculations
+- Insufficient balance operations
+- Save data corruption issues
 
 ---
 
- 
+### [v0.0.1] - Alpha Release - 15-11-2025
 
-## Technical Stack
+**Status:** Released
 
- 
-
-- **Frontend**: Next.js 16.0.1, React 19.2.0, TypeScript 5
-
-- **Styling**: Tailwind CSS 4
-
-- **State Management**: Zustand 5.0.8
-
-- **Linting**: ESLint 9
-
- 
-
----
- 
-
-## Contributors
-
- 
-
-- Development Team
-
-- Built with AI assistance (Claude)
-
- 
-
----
-
- 
-
-[Unreleased]: https://github.com/Koname102/Business-Simulator/compare/v0.0.1...HEAD
-
-[0.0.1]: https://github.com/Koname102/Business-Simulator/releases/tag/v0.0.1
+#### Added
+- Character creation system (name and age)
+- Company creation system (name, business type, difficulty level)
+- Difficulty levels (Easy, Medium, Hard)
+- Business type selection (Fintech, Insurance, Investment)
+- Time system with game clock and speed controls
+- Transaction tracking system
+- Notification system
+- Game pause and resume functionality
+- Fintech lending mode with loan applications and approvals
+- Credit score system for borrowers
+- Loan repayment and default mechanics
+- Life insurance mode with policy generation
+- Premium collection system
+- Insurance claim approval system
+- Venture capital mode with deal flow
+- Investment portfolio management
+- Exit opportunities with profit calculation
+- Management and performance fee system
+- Basic stats dashboard for each business type
+- Save and load game functionality
+- Local storage persistence
