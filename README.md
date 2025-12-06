@@ -1,3 +1,5 @@
+<meta name="google-site-verification" content="lgGqXDDlD3CGxHX6AjMps6Ysf7m1hPRG3aobbfhsLbQ" />
+
 # Business-Simulator
 Second Project Web Game
 # Business Simulator
